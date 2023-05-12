@@ -17,7 +17,7 @@ class FloLexer(Lexer):
     ignore = ' \t'
 
     # Expressions régulières correspondant au différents Lexèmes par ordre de priorité
-    INFERIEUR_OU_EGAL= r'<='
+    INFERIEUR_EGAL= r'<='
     SUPERIEUR_EGAL = r'>='
     EGAL = r'=='
     NON_EGAL = r'!='
