@@ -30,7 +30,7 @@ class Ecrire:
         afficher("</ecrire>",indent)
         
 class Operation:
-    def __init__(self,op,exp1,exp2):
+    def __init__(self,op,exp1,exp2=None):
         self.exp1 = exp1
         self.op = op
         self.exp2 = exp2
@@ -38,20 +38,22 @@ class Operation:
         afficher("<operation>",indent)
         afficher(self.op,indent+1)
         self.exp1.afficher(indent+1)
-        self.exp2.afficher(indent+1)
+        if(self.exp2!=None):
+            self.exp2.afficher(indent+1)
         afficher("</operation>",indent)
+
 class Entier:
     def __init__(self,valeur):
         self.valeur = valeur
     def afficher(self,indent=0):
         afficher("[Entier:"+str(self.valeur)+"]",indent)
-        
+
 class Bool:
     def __init__(self, valeur):
         self.valeur = valeur
 
-    def afficher(self):
-        print(self.valeur)
+    def afficher(self, indent=0):
+        afficher("[Booleen:"+self.valeur+"]",indent)
         
 class Variable:
     def __init__(self,nom):

@@ -14,7 +14,7 @@ class FloParser(Parser):
         #('left', 'EGAL', 'NON_EGAL', 'INFERIEUR_EGAL', 'SUPERIEUR_EGAL', 'INFERIEUR', 'SUPERIEUR'),
         ('left', '+', '-'),
         ('left', '*', '/', '%'),
-        ('left', '^'),
+        #('left', '^'),
         #('right', 'UMOINS'),
         ('left', '(', ')')
     )
@@ -42,6 +42,10 @@ class FloParser(Parser):
     @_('ECRIRE "(" exprGenerale ")" ";"')
     def ecrire(self, p):
         return arbre_abstrait.Ecrire(p.exprGenerale) #p.expr = p[2]
+
+    @_('"(" expr ")"')
+    def exprGenerale(self, p):
+        return p.expr
 
     @_('"(" expr ")"')
     def expr(self, p):
@@ -87,11 +91,7 @@ class FloParser(Parser):
 
     @_('NON bool')
     def bool(self, p):
-        return arbre_abstrait.Operation(p[0],p[1],None)
-    
-    @_('"(" bool ")"')
-    def expr(self, p):
-        return p[1]
+        return arbre_abstrait.Operation(p[0],p[1])
 
     @_('expr "+" expr',
        'expr "-" expr',
@@ -104,10 +104,13 @@ class FloParser(Parser):
        'expr NON_EGAL expr',
        'expr INFERIEUR_EGAL expr',
        'expr SUPERIEUR_EGAL expr',
-       'expr "^" expr',)
+       )
     def expr(self, p):
         return arbre_abstrait.Operation(p[1], p[0], p[2])
     
+    @_('"(" bool ")"')
+    def expr(self, p):
+        return p[1]
 
 
 if __name__ == '__main__':

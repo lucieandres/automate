@@ -1,5 +1,3 @@
-Entier a = 10;
-
 ecrire(2 * 3 + 5);
 ecrire(FAUX);
 ecrire((2 <= 3) == TRUE);
