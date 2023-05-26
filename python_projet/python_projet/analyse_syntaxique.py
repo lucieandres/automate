@@ -6,7 +6,7 @@ import arbre_abstrait
 class FloParser(Parser):
     # On récupère la liste des lexèmes de l'analyse lexicale
     tokens = FloLexer.tokens
-    
+
     # Définition des priorités
     precedence = (
         #('left', 'ET', 'OU'),
@@ -17,7 +17,6 @@ class FloParser(Parser):
         #('right', 'UMOINS'),
         ('left', '(', ')')
     )
-
     # Règles gramaticales et actions associées
 
     @_('listeInstructions')
@@ -40,36 +39,18 @@ class FloParser(Parser):
        'nomFonction')
     def instruction(self, p):
         return p[0]
-    
-    @_('lire')
-    def facteur(self,p):
-        return arbre_abstrait.Lire()
-
-    @_('ECRIRE "(" expr ")" ";"')
+            
+    @_('ECRIRE "(" exprGenerale ")" ";"')
     def ecrire(self, p):
-        return arbre_abstrait.Ecrire(p.expr) #p.expr = p[2]
+        return arbre_abstrait.Ecrire(p.exprGenerale) #p.expr = p[2]
 
-    @_('LIRE "(" ")" ";"')
-    def lire(self, p):
-        return arbre_abstrait.Lire()
-    
-    @_('IDENTIFIANT "(" ")" ";"')
-    def nomFonction(self, p):
-        return arbre_abstrait.Fonction(p.IDENTIFIANT)
-    
-    @_('expr "+" expr',
-       'expr "-" expr',
-       'expr "*" expr',
-       'expr "/" expr',
-       'expr "%" expr',
-       'expr "<" expr',
-       'expr ">" expr',
-       'expr EGAL expr',
-       'expr NON_EGAL expr',
-       'expr INFERIEUR_EGAL expr',
-       'expr SUPERIEUR_EGAL expr',)
+    @_('"(" expr ")"')
+    def exprGenerale(self, p):
+        return p.expr
+
+    @_('"(" expr ")"')
     def expr(self, p):
-        return arbre_abstrait.Operation(p[1], p[0], p[2])
+        return p.expr #ou p[1]
         
     @_('ENTIER')
     def expr(self, p):
@@ -86,13 +67,72 @@ class FloParser(Parser):
     @_('IDENTIFIANT')
     def factor(self, p):
         return arbre_abstrait.Variable(p.IDENTIFIANT)
+
+    @_('"(" expr ")"')
+    def factor(self, p):
+        return p.expr
+    
+    @_('expr')
+    def bool(self, p):
+        return p[0]
+    
+    @_('bool')
+    def exprGenerale(self, p):
+        return p[0]
+
+    @_('VRAI',
+       'FAUX')
+    def bool(self, p):
+        return arbre_abstrait.Bool(p[0])
+    
+    @_('bool ET bool',
+       'bool OU bool')
+    def bool(self, p):
+        return arbre_abstrait.Operation(p[1],p[0],p[2])
+
+    @_('NON bool')
+    def bool(self, p):
+        return arbre_abstrait.Operation(p[0],p[1])
+
+    @_('expr "+" expr',
+       'expr "-" expr',
+       'expr "*" expr',
+       'expr "/" expr',
+       'expr "%" expr',
+       'expr "<" expr',
+       'expr ">" expr',
+       'expr EGAL expr',
+       'expr NON_EGAL expr',
+       'expr INFERIEUR_EGAL expr',
+       'expr SUPERIEUR_EGAL expr',
+       )
+    def expr(self, p):
+        return arbre_abstrait.Operation(p[1], p[0], p[2])
+    
+    @_('"(" bool ")"')
+    def expr(self, p):
+        return p[1]
+
+    @_('IDENTIFIANT')
+    def factor(self, p):
+        return arbre_abstrait.Variable(p.IDENTIFIANT)
     
     @_('IDENTIFIANT "=" expr ";"')
     def affectation(self, p):
         return arbre_abstrait.Affectation(p.IDENTIFIANT, p.expr)
+
+    @_('IDENTIFIANT "(" ")" ";"')
+    def nomFonction(self, p):
+        return arbre_abstrait.Fonction(p.IDENTIFIANT)
     
-
-
+    @_('LIRE "(" ")" ";"')
+    def lire(self, p):
+        return arbre_abstrait.Lire()
+    
+    @_('lire')
+    def facteur(self,p):
+        return arbre_abstrait.Lire()
+    
 if __name__ == '__main__':
     lexer = FloLexer()
     parser = FloParser()
@@ -106,3 +146,4 @@ if __name__ == '__main__':
                 arbre.afficher()
             except EOFError:
                 exit()
+
