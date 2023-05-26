@@ -13,8 +13,8 @@ class FloParser(Parser):
         #('left', 'EGAL', 'NON_EGAL', 'INFERIEUR_EGAL', 'SUPERIEUR_EGAL', 'INFERIEUR', 'SUPERIEUR'),
         ('left', '+', '-'),
         ('left', '*', '/', '%'),
-        ('left', '^'),
-        ('right', 'UMOINS'),
+        #('left', '^'),
+        #('right', 'UMOINS'),
         ('left', '(', ')')
     )
 
@@ -35,17 +35,41 @@ class FloParser(Parser):
         p[1].instructions.append(p[0])
         return p[1]
         
-    @_('ecrire')
+    @_('ecrire',
+       'affectation',
+       'nomFonction')
     def instruction(self, p):
         return p[0]
-            
+    
+    @_('lire')
+    def facteur(self,p):
+        return arbre_abstrait.Lire()
+
     @_('ECRIRE "(" expr ")" ";"')
     def ecrire(self, p):
         return arbre_abstrait.Ecrire(p.expr) #p.expr = p[2]
 
-    @_('"(" expr ")"')
+    @_('LIRE "(" ")" ";"')
+    def lire(self, p):
+        return arbre_abstrait.Lire()
+    
+    @_('IDENTIFIANT "(" ")" ";"')
+    def nomFonction(self, p):
+        return arbre_abstrait.Fonction(p.IDENTIFIANT)
+    
+    @_('expr "+" expr',
+       'expr "-" expr',
+       'expr "*" expr',
+       'expr "/" expr',
+       'expr "%" expr',
+       'expr "<" expr',
+       'expr ">" expr',
+       'expr EGAL expr',
+       'expr NON_EGAL expr',
+       'expr INFERIEUR_EGAL expr',
+       'expr SUPERIEUR_EGAL expr',)
     def expr(self, p):
-        return p.expr #ou p[1]
+        return arbre_abstrait.Operation(p[1], p[0], p[2])
         
     @_('ENTIER')
     def expr(self, p):
@@ -62,24 +86,10 @@ class FloParser(Parser):
     @_('IDENTIFIANT')
     def factor(self, p):
         return arbre_abstrait.Variable(p.IDENTIFIANT)
-
-    @_('"(" expr ")"')
-    def factor(self, p):
-        return p.expr
     
-    @_('expr "+" expr',
-       'expr "-" expr',
-       'expr "*" expr',
-       'expr "/" expr',
-       'expr "%" expr',
-       'expr "<" expr',
-       'expr ">" expr',
-       'expr EGAL expr',
-       'expr NON_EGAL expr',
-       'expr INFERIEUR_EGAL expr',
-       'expr SUPERIEUR_EGAL expr',)
-    def expr(self, p):
-        return arbre_abstrait.Operation(p[1], p[0], p[2])
+    @_('IDENTIFIANT "=" expr ";"')
+    def affectation(self, p):
+        return arbre_abstrait.Affectation(p.IDENTIFIANT, p.expr)
     
 
 
