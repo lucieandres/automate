@@ -1,3 +1,4 @@
+
 import sys
 from sly import Parser
 from analyse_lexicale import FloLexer
@@ -7,6 +8,16 @@ class FloParser(Parser):
     # On récupère la liste des lexèmes de l'analyse lexicale
     tokens = FloLexer.tokens
 
+    # Définition des priorités
+    precedence = (
+        #('left', 'ET', 'OU'),
+        #('left', 'EGAL', 'NON_EGAL', 'INFERIEUR_EGAL', 'SUPERIEUR_EGAL', 'INFERIEUR', 'SUPERIEUR'),
+        ('left', '+', '-'),
+        ('left', '*', '/', '%'),
+        ('left', '^'),
+        #('right', 'UMOINS'),
+        ('left', '(', ')')
+    )
     # Règles gramaticales et actions associées
 
     @_('listeInstructions')
@@ -92,7 +103,8 @@ class FloParser(Parser):
        'expr EGAL expr',
        'expr NON_EGAL expr',
        'expr INFERIEUR_EGAL expr',
-       'expr SUPERIEUR_EGAL expr',)
+       'expr SUPERIEUR_EGAL expr',
+       'expr "^" expr',)
     def expr(self, p):
         return arbre_abstrait.Operation(p[1], p[0], p[2])
     
