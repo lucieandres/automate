@@ -28,9 +28,9 @@ class FloParser(Parser):
     def instruction(self, p):
         return p[0]
             
-    @_('ECRIRE "(" expr ")" ";"')
+    @_('ECRIRE "(" exprGenerale ")" ";"')
     def ecrire(self, p):
-        return arbre_abstrait.Ecrire(p.expr) #p.expr = p[2]
+        return arbre_abstrait.Ecrire(p.exprGenerale) #p.expr = p[2]
 
     @_('"(" expr ")"')
     def expr(self, p):
@@ -56,6 +56,32 @@ class FloParser(Parser):
     def factor(self, p):
         return p.expr
     
+    @_('expr')
+    def bool(self, p):
+        return p[0]
+    
+    @_('bool')
+    def exprGenerale(self, p):
+        return p[0]
+
+    @_('VRAI',
+       'FAUX')
+    def bool(self, p):
+        return arbre_abstrait.Bool(p[0])
+    
+    @_('bool ET bool',
+       'bool OU bool')
+    def bool(self, p):
+        return arbre_abstrait.Operation(p[1],p[0],p[2])
+
+    @_('NON bool')
+    def bool(self, p):
+        return arbre_abstrait.Operation(p[0],p[1],None)
+    
+    @_('"(" bool ")"')
+    def expr(self, p):
+        return p[1]
+
     @_('expr "+" expr',
        'expr "-" expr',
        'expr "*" expr',

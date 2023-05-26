@@ -5,7 +5,7 @@ class FloLexer(Lexer):
     # Noms des lexèmes (sauf les litéraux). En majuscule. Ordre non important
     tokens = { IDENTIFIANT, ENTIER, ECRIRE, LIRE, TYPE_ENTIER, TYPE_BOOLEEN,
                 INFERIEUR_EGAL, SUPERIEUR_EGAL, EGAL, NON_EGAL,
-                ET, OU, NON, VRAI, FAUX,
+                ET, OU, NON, VRAI, FAUX, VARIABLE,
                 SI, SINON, TANT_QUE, RETOURNER }
 
     #Les caractères litéraux sont des caractères uniques qui sont retournés tel quel quand rencontré par l'analyse lexicale. 
@@ -21,7 +21,8 @@ class FloLexer(Lexer):
     SUPERIEUR_EGAL = r'>='
     EGAL = r'=='
     NON_EGAL = r'!='
-    
+
+
     @_(r'0|[1-9][0-9]*')
     def ENTIER(self, t):
         t.value = int(t.value)
@@ -34,7 +35,7 @@ class FloLexer(Lexer):
     IDENTIFIANT['ecrire'] = ECRIRE
     IDENTIFIANT['lire'] = LIRE
     IDENTIFIANT['entier'] = TYPE_ENTIER
-    IDENTIFIANT['booleen'] = TYPE_BOOLEEN
+    IDENTIFIANT['bool'] = TYPE_BOOLEEN
     IDENTIFIANT['et'] = ET
     IDENTIFIANT['ou'] = OU
     IDENTIFIANT['non'] = NON
