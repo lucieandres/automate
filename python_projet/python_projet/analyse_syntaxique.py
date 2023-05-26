@@ -6,6 +6,17 @@ import arbre_abstrait
 class FloParser(Parser):
     # On récupère la liste des lexèmes de l'analyse lexicale
     tokens = FloLexer.tokens
+    
+    # Définition des priorités
+    precedence = (
+        #('left', 'ET', 'OU'),
+        #('left', 'EGAL', 'NON_EGAL', 'INFERIEUR_EGAL', 'SUPERIEUR_EGAL', 'INFERIEUR', 'SUPERIEUR'),
+        ('left', '+', '-'),
+        ('left', '*', '/', '%'),
+        ('left', '^'),
+        ('right', 'UMOINS'),
+        ('left', '(', ')')
+    )
 
     # Règles gramaticales et actions associées
 
