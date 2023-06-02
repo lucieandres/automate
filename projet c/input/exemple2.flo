@@ -1,0 +1,2 @@
+entier n = 7;
+ecrire(n);
