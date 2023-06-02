@@ -1,2 +1,1 @@
-entier n = 3;
-ecrire(3);
+ecrire(42);

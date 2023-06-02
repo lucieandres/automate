@@ -1,2 +1,1 @@
-entier n = 7;
-ecrire(n);
+ecrire(2 * 3 + 5);
