@@ -1,4 +1,3 @@
-
 import sys
 from sly import Parser
 from analyse_lexicale import FloLexer
@@ -35,7 +34,9 @@ class FloParser(Parser):
         p[1].instructions.append(p[0])
         return p[1]
         
-    @_('ecrire')
+    @_('ecrire',
+       'affectation',
+       'nomFonction')
     def instruction(self, p):
         return p[0]
             
@@ -112,7 +113,26 @@ class FloParser(Parser):
     def expr(self, p):
         return p[1]
 
+    @_('IDENTIFIANT')
+    def factor(self, p):
+        return arbre_abstrait.Variable(p.IDENTIFIANT)
+    
+    @_('IDENTIFIANT "=" expr ";"')
+    def affectation(self, p):
+        return arbre_abstrait.Affectation(p.IDENTIFIANT, p.expr)
 
+    @_('IDENTIFIANT "(" ")" ";"')
+    def nomFonction(self, p):
+        return arbre_abstrait.Fonction(p.IDENTIFIANT)
+    
+    @_('LIRE "(" ")" ";"')
+    def lire(self, p):
+        return arbre_abstrait.Lire()
+    
+    @_('lire')
+    def facteur(self,p):
+        return arbre_abstrait.Lire()
+    
 if __name__ == '__main__':
     lexer = FloLexer()
     parser = FloParser()
@@ -126,3 +146,4 @@ if __name__ == '__main__':
                 arbre.afficher()
             except EOFError:
                 exit()
+

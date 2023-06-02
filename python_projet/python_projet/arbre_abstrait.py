@@ -54,9 +54,33 @@ class Bool:
 
     def afficher(self, indent=0):
         afficher("[Booleen:"+self.valeur+"]",indent)
+class Lire:
+    def __init__(self):
+        pass
+    def afficher(self,indent=0):
+        afficher("<lire>",indent)
+        afficher("</lire>",indent)
         
 class Variable:
     def __init__(self,nom):
         self.nom = nom
     def afficher(self,indent=0):
         afficher("[Variable:"+self.nom+"]",indent)
+        
+class Affectation:
+    def __init__(self,nom,exp):
+        self.nom = nom
+        self.exp = exp
+    def afficher(self,indent=0):
+        afficher("<affectation>",indent)
+        afficher(self.nom,indent+1)
+        self.exp.afficher(indent+1)
+        afficher("</affectation>",indent)
+        
+class Fonction:
+    def __init__(self,nom):
+        self.nom = nom
+    def afficher(self,indent=0):
+        afficher("<fonction>",indent)
+        afficher(self.nom,indent+1)
+        afficher("</fonction>",indent)
