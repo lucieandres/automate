@@ -32,6 +32,7 @@ n_programme* arbre_abstrait;
 %token EGALE
 %token PLUS
 %token MOINS
+%token DIFFERENT
 %token FOIS
 %token TYPE_ENTIER
 %token PARENTHESE_OUVRANTE
@@ -41,6 +42,7 @@ n_programme* arbre_abstrait;
 %token LE
 %token GE
 %token GT
+%token EQ
 %token OU
 %token ET
 %token RETOURNER
@@ -75,7 +77,7 @@ n_programme* arbre_abstrait;
 %type <exp> expr 
 %type <exp> produit 
 %type <exp> expr_cond 
-%type <inst> retourner 
+%type <inst> retourner
 
 %type <l_parm> list_parms 
 %type <parm> parms 
@@ -107,6 +109,7 @@ instruction:
     |   ecrire { $$ =$1; }
     |   retourner { $$ = $1; }
     |   cond { $$ = $1; }
+    |   expr POINT_VIRGULE { $$ = creer_n_exp($1); }
 
 fonction:
     type IDENTIFIANT PARENTHESE_OUVRANTE list_parms PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT { $$ = creer_n_fonction($1, $2, $4, $7); }
@@ -139,6 +142,8 @@ liste_expr:
 
 facteur:
         ENTIER { $$ = creer_n_entier($1); }
+    |   IDENTIFIANT { $$ = creer_n_identifiant($1); }
+    |   MOINS ENTIER { $$ = creer_n_entier(-$2); }
     |   PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE { $$ = $2; }
     |   IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE { $$ = creer_n_appel_fonction($1, creer_n_liste_expr($3)); }
 ;
@@ -155,6 +160,7 @@ expr:
     |   expr PLUS produit { $$ =creer_n_operation("+", $1, $3); }
     |   expr MOINS produit { $$ =creer_n_operation("-", $1 , $3); }
     |   expr MODULO produit { $$ =creer_n_operation("%", $1 , $3); }
+    |   MOINS ENTIER { $$ = creer_n_entier(-$2); }
     |   NON expr { $$ = creer_n_non($2); }
     |   IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE { $$ = creer_n_appel_fonction($1, creer_n_liste_expr($3)); }
     |   PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE { $$ = $2; }
@@ -194,6 +200,8 @@ expr_cond:
     |   expr_cond GE expr_cond { $$ =creer_n_operation(">=", $1, $3); }
     |   expr_cond OU expr_cond { $$ =creer_n_operation("OU", $1, $3); }
     |   expr_cond ET expr_cond { $$ =creer_n_operation("ET", $1, $3); }
+    |   expr_cond DIFFERENT expr_cond { $$ =creer_n_operation("!=", $1, $3); }
+    |   expr_cond EQ expr_cond { $$ =creer_n_operation("==", $1, $3); }
 ;
 
 retourner:

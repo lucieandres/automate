@@ -39,12 +39,15 @@ espace               [ \t\r\n]
 ">"                 { return GT;       }
 "<"                 { return LT;       }
 ">="                 { return GE;       }
+"!="                  { return DIFFERENT; }
+"=="                  { return EQ; }
 "ou"                 { return OU;       }
 "et"                 { return ET;       }
 "sinon"                 { return SINON;       }
 "retourner"                 { return RETOURNER;       }
 "="                  { return EGALE; }
 "tantQue"                  { return TANTQUE; }
+"tantque"                  { return TANTQUE; }
 ","                  { return VIRGULE; }
 "non"                 { return NON;       }
 {entier}             { yylval.entier=atoi(yytext); return ENTIER;}
@@ -114,6 +117,7 @@ char *str_token[] = {
   "<",
   ">",
   ">=",
+  "!=",
   "OU",
   "ET",
   "SINON",

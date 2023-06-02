@@ -66,7 +66,8 @@ struct n_instruction{
     i_fonction,
     i_cond,
     i_retourner,
-    i_affectation
+    i_affectation,
+    i_expression
   } type_instruction; // pour le moment une instruction peut-être uniquement de type écrire. Il faudra ajouter affectation, exécution de fonction, si,sinon, etc...
   union{ 
     n_exp* exp; // pour ecrire(exp);
@@ -158,5 +159,6 @@ n_instruction *creer_n_cond(l_expr *cond);
 n_instruction *creer_n_retourner(n_exp *exp);
 n_exp *creer_n_non(n_exp* exp);
 n_instruction *creer_n_affectation(char *nom, n_exp* exp);
+n_instruction *creer_n_exp(n_exp* exp);
 
 #endif

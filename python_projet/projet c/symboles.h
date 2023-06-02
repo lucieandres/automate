@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -58,32 +58,34 @@ extern int yydebug;
     EGALE = 259,                   /* EGALE  */
     PLUS = 260,                    /* PLUS  */
     MOINS = 261,                   /* MOINS  */
-    FOIS = 262,                    /* FOIS  */
-    TYPE_ENTIER = 263,             /* TYPE_ENTIER  */
-    PARENTHESE_OUVRANTE = 264,     /* PARENTHESE_OUVRANTE  */
-    PARENTHESE_FERMANTE = 265,     /* PARENTHESE_FERMANTE  */
-    POINT_VIRGULE = 266,           /* POINT_VIRGULE  */
-    SI = 267,                      /* SI  */
-    LE = 268,                      /* LE  */
-    GE = 269,                      /* GE  */
-    GT = 270,                      /* GT  */
-    OU = 271,                      /* OU  */
-    ET = 272,                      /* ET  */
-    RETOURNER = 273,               /* RETOURNER  */
-    ENTIER = 274,                  /* ENTIER  */
-    ECRIRE = 275,                  /* ECRIRE  */
-    TYPE_BOOLEEN = 276,            /* TYPE_BOOLEEN  */
-    VRAI = 277,                    /* VRAI  */
-    FAUX = 278,                    /* FAUX  */
-    TANTQUE = 279,                 /* TANTQUE  */
-    NON = 280,                     /* NON  */
-    DIVISER = 281,                 /* DIVISER  */
-    MODULO = 282,                  /* MODULO  */
-    SINON = 283,                   /* SINON  */
-    LT = 284,                      /* LT  */
-    BLOC_OUVRANT = 285,            /* BLOC_OUVRANT  */
-    BLOC_FERMANT = 286,            /* BLOC_FERMANT  */
-    VIRGULE = 287                  /* VIRGULE  */
+    DIFFERENT = 262,               /* DIFFERENT  */
+    FOIS = 263,                    /* FOIS  */
+    TYPE_ENTIER = 264,             /* TYPE_ENTIER  */
+    PARENTHESE_OUVRANTE = 265,     /* PARENTHESE_OUVRANTE  */
+    PARENTHESE_FERMANTE = 266,     /* PARENTHESE_FERMANTE  */
+    POINT_VIRGULE = 267,           /* POINT_VIRGULE  */
+    SI = 268,                      /* SI  */
+    LE = 269,                      /* LE  */
+    GE = 270,                      /* GE  */
+    GT = 271,                      /* GT  */
+    EQ = 272,                      /* EQ  */
+    OU = 273,                      /* OU  */
+    ET = 274,                      /* ET  */
+    RETOURNER = 275,               /* RETOURNER  */
+    ENTIER = 276,                  /* ENTIER  */
+    ECRIRE = 277,                  /* ECRIRE  */
+    TYPE_BOOLEEN = 278,            /* TYPE_BOOLEEN  */
+    VRAI = 279,                    /* VRAI  */
+    FAUX = 280,                    /* FAUX  */
+    TANTQUE = 281,                 /* TANTQUE  */
+    NON = 282,                     /* NON  */
+    DIVISER = 283,                 /* DIVISER  */
+    MODULO = 284,                  /* MODULO  */
+    SINON = 285,                   /* SINON  */
+    LT = 286,                      /* LT  */
+    BLOC_OUVRANT = 287,            /* BLOC_OUVRANT  */
+    BLOC_FERMANT = 288,            /* BLOC_FERMANT  */
+    VIRGULE = 289                  /* VIRGULE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -104,7 +106,7 @@ union YYSTYPE
     l_parm* l_parm;
     char* string;
 
-#line 108 "symboles.h"
+#line 110 "symboles.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -115,6 +117,8 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE yylval;
 
+
 int yyparse (void);
+
 
 #endif /* !YY_YY_SYMBOLES_H_INCLUDED  */

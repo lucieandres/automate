@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -46,10 +46,10 @@
    USER NAME SPACE" below.  */
 
 /* Identify Bison output, and Bison version.  */
-#define YYBISON 30705
+#define YYBISON 30802
 
 /* Bison version string.  */
-#define YYBISON_VERSION "3.7.5"
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -115,51 +115,53 @@ enum yysymbol_kind_t
   YYSYMBOL_EGALE = 4,                      /* EGALE  */
   YYSYMBOL_PLUS = 5,                       /* PLUS  */
   YYSYMBOL_MOINS = 6,                      /* MOINS  */
-  YYSYMBOL_FOIS = 7,                       /* FOIS  */
-  YYSYMBOL_TYPE_ENTIER = 8,                /* TYPE_ENTIER  */
-  YYSYMBOL_PARENTHESE_OUVRANTE = 9,        /* PARENTHESE_OUVRANTE  */
-  YYSYMBOL_PARENTHESE_FERMANTE = 10,       /* PARENTHESE_FERMANTE  */
-  YYSYMBOL_POINT_VIRGULE = 11,             /* POINT_VIRGULE  */
-  YYSYMBOL_SI = 12,                        /* SI  */
-  YYSYMBOL_LE = 13,                        /* LE  */
-  YYSYMBOL_GE = 14,                        /* GE  */
-  YYSYMBOL_GT = 15,                        /* GT  */
-  YYSYMBOL_OU = 16,                        /* OU  */
-  YYSYMBOL_ET = 17,                        /* ET  */
-  YYSYMBOL_RETOURNER = 18,                 /* RETOURNER  */
-  YYSYMBOL_ENTIER = 19,                    /* ENTIER  */
-  YYSYMBOL_ECRIRE = 20,                    /* ECRIRE  */
-  YYSYMBOL_TYPE_BOOLEEN = 21,              /* TYPE_BOOLEEN  */
-  YYSYMBOL_VRAI = 22,                      /* VRAI  */
-  YYSYMBOL_FAUX = 23,                      /* FAUX  */
-  YYSYMBOL_TANTQUE = 24,                   /* TANTQUE  */
-  YYSYMBOL_NON = 25,                       /* NON  */
-  YYSYMBOL_DIVISER = 26,                   /* DIVISER  */
-  YYSYMBOL_MODULO = 27,                    /* MODULO  */
-  YYSYMBOL_SINON = 28,                     /* SINON  */
-  YYSYMBOL_LT = 29,                        /* LT  */
-  YYSYMBOL_BLOC_OUVRANT = 30,              /* BLOC_OUVRANT  */
-  YYSYMBOL_BLOC_FERMANT = 31,              /* BLOC_FERMANT  */
-  YYSYMBOL_VIRGULE = 32,                   /* VIRGULE  */
-  YYSYMBOL_YYACCEPT = 33,                  /* $accept  */
-  YYSYMBOL_prog = 34,                      /* prog  */
-  YYSYMBOL_listeInstructions = 35,         /* listeInstructions  */
-  YYSYMBOL_instruction = 36,               /* instruction  */
-  YYSYMBOL_fonction = 37,                  /* fonction  */
-  YYSYMBOL_declarationVariable = 38,       /* declarationVariable  */
-  YYSYMBOL_parms = 39,                     /* parms  */
-  YYSYMBOL_list_parms = 40,                /* list_parms  */
-  YYSYMBOL_ecrire = 41,                    /* ecrire  */
-  YYSYMBOL_liste_expr = 42,                /* liste_expr  */
-  YYSYMBOL_facteur = 43,                   /* facteur  */
-  YYSYMBOL_produit = 44,                   /* produit  */
-  YYSYMBOL_expr = 45,                      /* expr  */
-  YYSYMBOL_affectation = 46,               /* affectation  */
-  YYSYMBOL_conditionSi = 47,               /* conditionSi  */
-  YYSYMBOL_cond = 48,                      /* cond  */
-  YYSYMBOL_expr_cond = 49,                 /* expr_cond  */
-  YYSYMBOL_retourner = 50,                 /* retourner  */
-  YYSYMBOL_type = 51                       /* type  */
+  YYSYMBOL_DIFFERENT = 7,                  /* DIFFERENT  */
+  YYSYMBOL_FOIS = 8,                       /* FOIS  */
+  YYSYMBOL_TYPE_ENTIER = 9,                /* TYPE_ENTIER  */
+  YYSYMBOL_PARENTHESE_OUVRANTE = 10,       /* PARENTHESE_OUVRANTE  */
+  YYSYMBOL_PARENTHESE_FERMANTE = 11,       /* PARENTHESE_FERMANTE  */
+  YYSYMBOL_POINT_VIRGULE = 12,             /* POINT_VIRGULE  */
+  YYSYMBOL_SI = 13,                        /* SI  */
+  YYSYMBOL_LE = 14,                        /* LE  */
+  YYSYMBOL_GE = 15,                        /* GE  */
+  YYSYMBOL_GT = 16,                        /* GT  */
+  YYSYMBOL_EQ = 17,                        /* EQ  */
+  YYSYMBOL_OU = 18,                        /* OU  */
+  YYSYMBOL_ET = 19,                        /* ET  */
+  YYSYMBOL_RETOURNER = 20,                 /* RETOURNER  */
+  YYSYMBOL_ENTIER = 21,                    /* ENTIER  */
+  YYSYMBOL_ECRIRE = 22,                    /* ECRIRE  */
+  YYSYMBOL_TYPE_BOOLEEN = 23,              /* TYPE_BOOLEEN  */
+  YYSYMBOL_VRAI = 24,                      /* VRAI  */
+  YYSYMBOL_FAUX = 25,                      /* FAUX  */
+  YYSYMBOL_TANTQUE = 26,                   /* TANTQUE  */
+  YYSYMBOL_NON = 27,                       /* NON  */
+  YYSYMBOL_DIVISER = 28,                   /* DIVISER  */
+  YYSYMBOL_MODULO = 29,                    /* MODULO  */
+  YYSYMBOL_SINON = 30,                     /* SINON  */
+  YYSYMBOL_LT = 31,                        /* LT  */
+  YYSYMBOL_BLOC_OUVRANT = 32,              /* BLOC_OUVRANT  */
+  YYSYMBOL_BLOC_FERMANT = 33,              /* BLOC_FERMANT  */
+  YYSYMBOL_VIRGULE = 34,                   /* VIRGULE  */
+  YYSYMBOL_YYACCEPT = 35,                  /* $accept  */
+  YYSYMBOL_prog = 36,                      /* prog  */
+  YYSYMBOL_listeInstructions = 37,         /* listeInstructions  */
+  YYSYMBOL_instruction = 38,               /* instruction  */
+  YYSYMBOL_fonction = 39,                  /* fonction  */
+  YYSYMBOL_declarationVariable = 40,       /* declarationVariable  */
+  YYSYMBOL_parms = 41,                     /* parms  */
+  YYSYMBOL_list_parms = 42,                /* list_parms  */
+  YYSYMBOL_ecrire = 43,                    /* ecrire  */
+  YYSYMBOL_liste_expr = 44,                /* liste_expr  */
+  YYSYMBOL_facteur = 45,                   /* facteur  */
+  YYSYMBOL_produit = 46,                   /* produit  */
+  YYSYMBOL_expr = 47,                      /* expr  */
+  YYSYMBOL_affectation = 48,               /* affectation  */
+  YYSYMBOL_conditionSi = 49,               /* conditionSi  */
+  YYSYMBOL_cond = 50,                      /* cond  */
+  YYSYMBOL_expr_cond = 51,                 /* expr_cond  */
+  YYSYMBOL_retourner = 52,                 /* retourner  */
+  YYSYMBOL_type = 53                       /* type  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -317,12 +319,18 @@ typedef int yy_state_fast_t;
 # define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -456,21 +464,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  30
+#define YYFINAL  36
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   157
+#define YYLAST   199
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  33
+#define YYNTOKENS  35
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  19
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  56
+#define YYNRULES  62
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  113
+#define YYNSTATES  123
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   287
+#define YYMAXUTOK   289
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -512,19 +520,20 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29,    30,    31,    32
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    91,    91,    94,    97,   100,   104,   105,   106,   107,
-     108,   109,   112,   116,   120,   124,   125,   126,   129,   135,
-     136,   137,   141,   142,   143,   147,   148,   149,   153,   154,
-     155,   156,   157,   158,   159,   160,   161,   162,   163,   164,
-     168,   172,   173,   177,   184,   185,   190,   191,   192,   193,
-     194,   195,   196,   200,   201,   205,   206
+       0,    93,    93,    96,    99,   102,   106,   107,   108,   109,
+     110,   111,   112,   115,   119,   123,   127,   128,   129,   132,
+     138,   139,   140,   144,   145,   146,   147,   148,   152,   153,
+     154,   158,   159,   160,   161,   162,   163,   164,   165,   166,
+     167,   168,   169,   170,   174,   178,   179,   183,   190,   191,
+     196,   197,   198,   199,   200,   201,   202,   203,   204,   208,
+     209,   213,   214
 };
 #endif
 
@@ -542,32 +551,21 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   static const char *const yy_sname[] =
   {
   "FIN", "error", "invalid token", "IDENTIFIANT", "EGALE", "PLUS",
-  "MOINS", "FOIS", "TYPE_ENTIER", "PARENTHESE_OUVRANTE",
-  "PARENTHESE_FERMANTE", "POINT_VIRGULE", "SI", "LE", "GE", "GT", "OU",
-  "ET", "RETOURNER", "ENTIER", "ECRIRE", "TYPE_BOOLEEN", "VRAI", "FAUX",
-  "TANTQUE", "NON", "DIVISER", "MODULO", "SINON", "LT", "BLOC_OUVRANT",
-  "BLOC_FERMANT", "VIRGULE", "$accept", "prog", "listeInstructions",
-  "instruction", "fonction", "declarationVariable", "parms", "list_parms",
-  "ecrire", "liste_expr", "facteur", "produit", "expr", "affectation",
-  "conditionSi", "cond", "expr_cond", "retourner", "type", YY_NULLPTR
+  "MOINS", "DIFFERENT", "FOIS", "TYPE_ENTIER", "PARENTHESE_OUVRANTE",
+  "PARENTHESE_FERMANTE", "POINT_VIRGULE", "SI", "LE", "GE", "GT", "EQ",
+  "OU", "ET", "RETOURNER", "ENTIER", "ECRIRE", "TYPE_BOOLEEN", "VRAI",
+  "FAUX", "TANTQUE", "NON", "DIVISER", "MODULO", "SINON", "LT",
+  "BLOC_OUVRANT", "BLOC_FERMANT", "VIRGULE", "$accept", "prog",
+  "listeInstructions", "instruction", "fonction", "declarationVariable",
+  "parms", "list_parms", "ecrire", "liste_expr", "facteur", "produit",
+  "expr", "affectation", "conditionSi", "cond", "expr_cond", "retourner",
+  "type", YY_NULLPTR
   };
   return yy_sname[yysymbol];
 }
 #endif
 
-#ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287
-};
-#endif
-
-#define YYPACT_NINF (-82)
+#define YYPACT_NINF (-61)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -577,138 +575,151 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     111,    11,   -82,    31,    41,    34,   -82,    42,    46,   -82,
-     111,   -82,   -82,   -82,   -82,    40,   -82,   -82,    56,    41,
-      41,    67,    41,   -82,   -82,   -82,    41,    15,    41,    41,
-     -82,   -82,    37,     9,    47,    89,    -5,    41,    65,    89,
-      36,    36,    36,   -82,    36,    36,    72,   123,   111,    40,
-      41,    -4,   -82,    35,    41,    41,    41,    41,    41,    41,
-      70,    30,   -82,    77,    41,   -82,   -82,     7,     7,     7,
-       7,     7,    79,    51,    81,    82,    85,   103,   115,   111,
-     128,   128,   128,   128,   128,   128,   -82,    41,    41,    95,
-      36,    36,   -82,   111,   -82,   -82,    -4,    90,   -82,    93,
-     -82,   116,   -82,   -82,   -82,    94,   -82,   111,   -82,   -82,
-     -82,    96,   -82
+      87,     5,     7,   -61,    60,    -3,    60,   -61,    21,   -61,
+     -61,   -61,    25,    60,    12,   -61,    87,   -61,   -61,   -61,
+      70,   -61,     8,   -61,   -61,    38,    60,    60,   -61,    44,
+     129,    60,   136,    60,    60,    31,   -61,   -61,    58,    58,
+      58,   -61,    58,    58,    -8,    45,   141,    66,    24,   -61,
+      31,     3,   -61,   155,   108,    46,    48,    60,   -61,   -61,
+      -5,    -5,    -5,    -5,    -5,    87,     8,    60,     2,   -61,
+     -61,    60,    60,    54,    60,    60,    60,    60,    60,    60,
+      60,    76,    59,    60,   -61,   166,    58,    58,    61,   170,
+      67,    81,    99,   -61,   114,    87,   114,   114,   114,   114,
+     114,   114,   114,   -61,    87,    94,   -61,   -61,   -61,   -61,
+     -61,     2,    74,   -61,    83,    84,   -61,   -61,    87,   -61,
+     -61,   103,   -61
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       5,     0,    55,     0,     0,     0,    56,     0,     0,     2,
-       3,     7,     6,     9,     8,    44,    11,    10,     0,     0,
-       0,    37,     0,    36,    39,    38,     0,    54,     0,     0,
-       1,     4,     0,     0,     0,    46,     0,    21,     0,    33,
-       0,     0,     0,    53,     0,     0,     0,     0,     5,    42,
-       0,    17,    40,     0,     0,     0,     0,     0,     0,     0,
-       0,    19,    35,     0,     0,    22,    25,    30,    31,    28,
-      29,    32,     0,     0,     0,     0,    15,     0,     0,     5,
-      47,    50,    49,    51,    52,    48,    34,    21,    21,     0,
-       0,     0,    18,     5,    43,    13,    17,     0,    14,     0,
-      20,     0,    23,    26,    27,     0,    16,     5,    41,    24,
-      45,     0,    12
+       5,    41,     0,    61,     0,     0,     0,    40,     0,    62,
+      43,    42,     0,     0,     0,     2,     3,     7,     6,     9,
+       0,     8,    48,    11,    10,     0,     0,    22,    36,    41,
+       0,     0,    60,     0,     0,    37,     1,     4,     0,     0,
+       0,    12,     0,     0,     0,     0,     0,     0,    20,    39,
+      50,     0,    59,     0,     0,    24,     0,     0,    23,    28,
+      33,    34,    31,    32,    35,     5,    46,     0,    18,    44,
+      38,    22,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    22,    25,     0,     0,     0,     0,     0,
+      16,     0,     0,    21,    57,     5,    51,    54,    53,    58,
+      55,    56,    52,    19,     5,     0,    26,    29,    30,    47,
+      14,    18,     0,    15,     0,     0,    27,    17,     5,    45,
+      49,     0,    13
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -82,   -82,   -10,   -82,   -82,   -82,   -82,    32,   -82,   -81,
-      20,    62,    -3,   -82,    98,   -82,   -27,   -82,   -48
+     -61,   -61,   -15,   -61,   -61,   -61,   -61,     9,   -61,    -9,
+     -14,   112,     0,   -61,   106,   -61,   -32,   -61,   -60
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     8,     9,    10,    11,    12,    76,    77,    13,    60,
-      66,    67,    35,    14,    15,    16,    36,    17,    18
+       0,    14,    15,    16,    17,    18,    90,    91,    19,    47,
+      59,    60,    50,    21,    22,    23,    51,    24,    25
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      31,    27,    47,    78,     2,    53,   100,   101,    54,    55,
-      56,    57,    58,    50,    90,    19,    34,     6,    51,    38,
-      40,    41,    42,    39,    59,    46,    43,    80,    81,    82,
-      83,    84,    85,    91,    61,    40,    41,    42,    74,    63,
-      20,    44,    45,    28,    21,    64,    30,    75,    78,     3,
-      22,    29,    40,    41,    42,    65,    44,    45,    52,    33,
-      23,    89,    87,    24,    25,    79,    26,    48,    32,    99,
-      40,    41,    42,    44,    45,    62,    37,    40,    41,    42,
-      86,    93,    72,   105,    61,    61,    88,    40,    41,    42,
-      92,    44,    45,    95,    40,    41,    42,   111,    44,    45,
-      40,    41,    42,    68,    69,   102,    70,    71,    44,    45,
-     103,   104,    94,    97,     1,    44,    45,    96,    98,     2,
-     107,    44,    45,     3,   108,   110,   109,   112,   106,     4,
-      49,     5,     6,    73,     0,     7,    54,    55,    56,    57,
-      58,    54,    55,    56,    57,    58,     0,     0,     0,     0,
-       0,     0,    59,     0,     0,     0,     0,    59
+      20,    37,    54,    86,    30,     5,    32,    31,    92,    26,
+      72,     3,    36,    35,    73,    27,    20,    74,    75,    76,
+      77,    78,    79,    87,    65,     9,    46,    48,    28,    38,
+      39,    33,    40,    53,    80,    34,    38,    39,    44,    40,
+      94,    45,    96,    97,    98,    99,   100,   101,   102,    67,
+      88,    92,    42,    43,    27,    68,    83,    85,    71,    42,
+      43,    55,    93,    29,    56,    20,     2,    89,    57,    84,
+       4,    48,   107,   108,   105,    38,    39,    70,    40,    58,
+     114,     7,    41,    48,    10,    11,    95,    13,   103,   115,
+       1,   104,   112,     2,   109,    20,     3,     4,    42,    43,
+       5,   111,   113,   121,    20,   116,   118,     6,     7,     8,
+       9,    10,    11,    12,    13,    72,   119,   120,    20,    82,
+     117,    72,    74,    75,    76,    77,    78,    79,    74,    75,
+      76,    77,    78,    79,    38,    39,   122,    40,     0,    80,
+      49,    38,    39,     0,    40,    80,    38,    39,    52,    40,
+      66,    61,    62,    69,    63,    64,     0,    42,    43,     0,
+      38,    39,     0,    40,    42,    43,    81,     0,     0,    42,
+      43,    38,    39,     0,    40,    38,    39,   106,    40,     0,
+       0,     0,   110,    42,    43,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    42,    43,     0,     0,    42,    43
 };
 
 static const yytype_int8 yycheck[] =
 {
-      10,     4,    29,    51,     8,    10,    87,    88,    13,    14,
-      15,    16,    17,     4,     7,     4,    19,    21,     9,    22,
-       5,     6,     7,    26,    29,    28,    11,    54,    55,    56,
-      57,    58,    59,    26,    37,     5,     6,     7,    48,     3,
-       9,    26,    27,     9,     3,     9,     0,    50,    96,    12,
-       9,     9,     5,     6,     7,    19,    26,    27,    11,     3,
-      19,    64,    32,    22,    23,    30,    25,    30,    28,    79,
-       5,     6,     7,    26,    27,    10,     9,     5,     6,     7,
-      10,    30,    10,    93,    87,    88,     9,     5,     6,     7,
-      11,    26,    27,    11,     5,     6,     7,   107,    26,    27,
-       5,     6,     7,    41,    42,    10,    44,    45,    26,    27,
-      90,    91,    31,    10,     3,    26,    27,    32,     3,     8,
-      30,    26,    27,    12,    31,    31,    10,    31,    96,    18,
-      32,    20,    21,    10,    -1,    24,    13,    14,    15,    16,
-      17,    13,    14,    15,    16,    17,    -1,    -1,    -1,    -1,
-      -1,    -1,    29,    -1,    -1,    -1,    -1,    29
+       0,    16,    34,     8,     4,    13,     6,    10,    68,     4,
+       7,     9,     0,    13,    11,    10,    16,    14,    15,    16,
+      17,    18,    19,    28,    32,    23,    26,    27,    21,     5,
+       6,    10,     8,    33,    31,    10,     5,     6,    30,     8,
+      72,     3,    74,    75,    76,    77,    78,    79,    80,     4,
+      65,   111,    28,    29,    10,    10,    10,    57,    34,    28,
+      29,     3,    71,     3,     6,    65,     6,    67,    10,    21,
+      10,    71,    86,    87,    83,     5,     6,    11,     8,    21,
+      95,    21,    12,    83,    24,    25,    32,    27,    12,   104,
+       3,    32,    11,     6,    33,    95,     9,    10,    28,    29,
+      13,    34,     3,   118,   104,    11,    32,    20,    21,    22,
+      23,    24,    25,    26,    27,     7,    33,    33,   118,    11,
+     111,     7,    14,    15,    16,    17,    18,    19,    14,    15,
+      16,    17,    18,    19,     5,     6,    33,     8,    -1,    31,
+      11,     5,     6,    -1,     8,    31,     5,     6,    12,     8,
+      44,    39,    40,    12,    42,    43,    -1,    28,    29,    -1,
+       5,     6,    -1,     8,    28,    29,    11,    -1,    -1,    28,
+      29,     5,     6,    -1,     8,     5,     6,    11,     8,    -1,
+      -1,    -1,    12,    28,    29,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    28,    29,    -1,    -1,    28,    29
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,     8,    12,    18,    20,    21,    24,    34,    35,
-      36,    37,    38,    41,    46,    47,    48,    50,    51,     4,
-       9,     3,     9,    19,    22,    23,    25,    45,     9,     9,
-       0,    35,    28,     3,    45,    45,    49,     9,    45,    45,
-       5,     6,     7,    11,    26,    27,    45,    49,    30,    47,
-       4,     9,    11,    10,    13,    14,    15,    16,    17,    29,
-      42,    45,    10,     3,     9,    19,    43,    44,    44,    44,
-      44,    44,    10,    10,    35,    45,    39,    40,    51,    30,
-      49,    49,    49,    49,    49,    49,    10,    32,     9,    45,
-       7,    26,    11,    30,    31,    11,    32,    10,     3,    35,
-      42,    42,    10,    43,    43,    35,    40,    30,    31,    10,
-      31,    35,    31
+       0,     3,     6,     9,    10,    13,    20,    21,    22,    23,
+      24,    25,    26,    27,    36,    37,    38,    39,    40,    43,
+      47,    48,    49,    50,    52,    53,     4,    10,    21,     3,
+      47,    10,    47,    10,    10,    47,     0,    37,     5,     6,
+       8,    12,    28,    29,    30,     3,    47,    44,    47,    11,
+      47,    51,    12,    47,    51,     3,     6,    10,    21,    45,
+      46,    46,    46,    46,    46,    32,    49,     4,    10,    12,
+      11,    34,     7,    11,    14,    15,    16,    17,    18,    19,
+      31,    11,    11,    10,    21,    47,     8,    28,    37,    47,
+      41,    42,    53,    44,    51,    32,    51,    51,    51,    51,
+      51,    51,    51,    12,    32,    44,    11,    45,    45,    33,
+      12,    34,    11,     3,    37,    37,    11,    42,    32,    33,
+      33,    37,    33
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    33,    34,    35,    35,    35,    36,    36,    36,    36,
-      36,    36,    37,    38,    39,    40,    40,    40,    41,    42,
-      42,    42,    43,    43,    43,    44,    44,    44,    45,    45,
-      45,    45,    45,    45,    45,    45,    45,    45,    45,    45,
-      46,    47,    47,    47,    48,    48,    49,    49,    49,    49,
-      49,    49,    49,    50,    50,    51,    51
+       0,    35,    36,    37,    37,    37,    38,    38,    38,    38,
+      38,    38,    38,    39,    40,    41,    42,    42,    42,    43,
+      44,    44,    44,    45,    45,    45,    45,    45,    46,    46,
+      46,    47,    47,    47,    47,    47,    47,    47,    47,    47,
+      47,    47,    47,    47,    48,    49,    49,    49,    50,    50,
+      51,    51,    51,    51,    51,    51,    51,    51,    51,    52,
+      52,    53,    53
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     2,     0,     1,     1,     1,     1,
-       1,     1,     8,     5,     2,     1,     3,     0,     5,     1,
-       3,     0,     1,     3,     4,     1,     3,     3,     3,     3,
-       3,     3,     3,     2,     4,     3,     1,     1,     1,     1,
-       4,     7,     3,     5,     1,     7,     1,     3,     3,     3,
-       3,     3,     3,     3,     2,     1,     1
+       1,     1,     2,     8,     5,     2,     1,     3,     0,     5,
+       1,     3,     0,     1,     1,     2,     3,     4,     1,     3,
+       3,     3,     3,     3,     3,     3,     2,     2,     4,     3,
+       1,     1,     1,     1,     4,     7,     3,     5,     1,     7,
+       1,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       2,     1,     1
 };
 
 
@@ -720,6 +731,7 @@ enum { YYENOMEM = -2 };
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -761,10 +773,7 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -791,10 +800,6 @@ yy_symbol_value_print (FILE *yyo,
   YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
@@ -996,7 +1001,7 @@ do {                                                                    \
       switch (yy_lac (yyesa, &yyes, &yyes_capacity, yyssp, yytoken))    \
         {                                                               \
         case YYENOMEM:                                                  \
-          goto yyexhaustedlab;                                          \
+          YYNOMEM;                                                      \
         case 1:                                                         \
           goto yyerrlab;                                                \
         }                                                               \
@@ -1452,6 +1457,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -1477,7 +1483,7 @@ yysetstate:
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -1505,7 +1511,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1516,7 +1522,7 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
@@ -1537,6 +1543,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1600,8 +1607,8 @@ yybackup:
     {
       if (yytable_value_is_error (yyn))
         goto yyerrlab;
-      YY_LAC_ESTABLISH;
       yyn = -yyn;
+      YY_LAC_ESTABLISH;
       goto yyreduce;
     }
 
@@ -1657,352 +1664,388 @@ yyreduce:
     switch (yyn)
       {
   case 2: /* prog: listeInstructions  */
-#line 91 "analyse_syntaxique.y"
+#line 93 "analyse_syntaxique.y"
                       { arbre_abstrait = creer_n_programme((yyvsp[0].l_inst)); }
-#line 1663 "analyse_syntaxique.c"
+#line 1670 "analyse_syntaxique.c"
     break;
 
   case 3: /* listeInstructions: instruction  */
-#line 94 "analyse_syntaxique.y"
+#line 96 "analyse_syntaxique.y"
                 {
         (yyval.l_inst) =creer_n_l_instructions((yyvsp[0].inst) ,NULL);
     }
-#line 1671 "analyse_syntaxique.c"
+#line 1678 "analyse_syntaxique.c"
     break;
 
   case 4: /* listeInstructions: instruction listeInstructions  */
-#line 97 "analyse_syntaxique.y"
+#line 99 "analyse_syntaxique.y"
                                       {
         (yyval.l_inst) =creer_n_l_instructions((yyvsp[-1].inst) ,(yyvsp[0].l_inst));
     }
-#line 1679 "analyse_syntaxique.c"
+#line 1686 "analyse_syntaxique.c"
     break;
 
   case 5: /* listeInstructions: %empty  */
-#line 100 "analyse_syntaxique.y"
+#line 102 "analyse_syntaxique.y"
         { (yyval.l_inst) = NULL; }
-#line 1685 "analyse_syntaxique.c"
+#line 1692 "analyse_syntaxique.c"
     break;
 
   case 6: /* instruction: declarationVariable  */
-#line 104 "analyse_syntaxique.y"
+#line 106 "analyse_syntaxique.y"
                             { (yyval.inst) = (yyvsp[0].inst); }
-#line 1691 "analyse_syntaxique.c"
+#line 1698 "analyse_syntaxique.c"
     break;
 
   case 7: /* instruction: fonction  */
-#line 105 "analyse_syntaxique.y"
+#line 107 "analyse_syntaxique.y"
                  { (yyval.inst) = (yyvsp[0].inst); }
-#line 1697 "analyse_syntaxique.c"
+#line 1704 "analyse_syntaxique.c"
     break;
 
   case 8: /* instruction: affectation  */
-#line 106 "analyse_syntaxique.y"
+#line 108 "analyse_syntaxique.y"
                     { (yyval.inst) = (yyvsp[0].inst); }
-#line 1703 "analyse_syntaxique.c"
+#line 1710 "analyse_syntaxique.c"
     break;
 
   case 9: /* instruction: ecrire  */
-#line 107 "analyse_syntaxique.y"
+#line 109 "analyse_syntaxique.y"
                { (yyval.inst) =(yyvsp[0].inst); }
-#line 1709 "analyse_syntaxique.c"
+#line 1716 "analyse_syntaxique.c"
     break;
 
   case 10: /* instruction: retourner  */
-#line 108 "analyse_syntaxique.y"
+#line 110 "analyse_syntaxique.y"
                   { (yyval.inst) = (yyvsp[0].inst); }
-#line 1715 "analyse_syntaxique.c"
+#line 1722 "analyse_syntaxique.c"
     break;
 
   case 11: /* instruction: cond  */
-#line 109 "analyse_syntaxique.y"
+#line 111 "analyse_syntaxique.y"
              { (yyval.inst) = (yyvsp[0].inst); }
-#line 1721 "analyse_syntaxique.c"
+#line 1728 "analyse_syntaxique.c"
     break;
 
-  case 12: /* fonction: type IDENTIFIANT PARENTHESE_OUVRANTE list_parms PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
+  case 12: /* instruction: expr POINT_VIRGULE  */
 #line 112 "analyse_syntaxique.y"
+                           { (yyval.inst) = creer_n_exp((yyvsp[-1].exp)); }
+#line 1734 "analyse_syntaxique.c"
+    break;
+
+  case 13: /* fonction: type IDENTIFIANT PARENTHESE_OUVRANTE list_parms PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
+#line 115 "analyse_syntaxique.y"
                                                                                                                     { (yyval.inst) = creer_n_fonction((yyvsp[-7].string), (yyvsp[-6].string), (yyvsp[-4].l_parm), (yyvsp[-1].l_inst)); }
-#line 1727 "analyse_syntaxique.c"
+#line 1740 "analyse_syntaxique.c"
     break;
 
-  case 13: /* declarationVariable: type IDENTIFIANT EGALE expr POINT_VIRGULE  */
-#line 116 "analyse_syntaxique.y"
+  case 14: /* declarationVariable: type IDENTIFIANT EGALE expr POINT_VIRGULE  */
+#line 119 "analyse_syntaxique.y"
                                               { printf("%s %s\n", (yyvsp[-4].string), (yyvsp[-3].string)); (yyval.inst) = creer_n_declaration((yyvsp[-4].string), (yyvsp[-3].string), (yyvsp[-1].exp)); }
-#line 1733 "analyse_syntaxique.c"
+#line 1746 "analyse_syntaxique.c"
     break;
 
-  case 14: /* parms: type IDENTIFIANT  */
-#line 120 "analyse_syntaxique.y"
+  case 15: /* parms: type IDENTIFIANT  */
+#line 123 "analyse_syntaxique.y"
                      { (yyval.parm) = creer_parm((yyvsp[-1].string), (yyvsp[0].string)); }
-#line 1739 "analyse_syntaxique.c"
+#line 1752 "analyse_syntaxique.c"
     break;
 
-  case 15: /* list_parms: parms  */
-#line 124 "analyse_syntaxique.y"
+  case 16: /* list_parms: parms  */
+#line 127 "analyse_syntaxique.y"
               { (yyval.l_parm) = creerListeParm((yyvsp[0].parm)); }
-#line 1745 "analyse_syntaxique.c"
+#line 1758 "analyse_syntaxique.c"
     break;
 
-  case 16: /* list_parms: parms VIRGULE list_parms  */
-#line 125 "analyse_syntaxique.y"
+  case 17: /* list_parms: parms VIRGULE list_parms  */
+#line 128 "analyse_syntaxique.y"
                                  { (yyval.l_parm) = ajouterListeParm((yyvsp[0].l_parm), (yyvsp[-2].parm)); }
-#line 1751 "analyse_syntaxique.c"
+#line 1764 "analyse_syntaxique.c"
     break;
 
-  case 17: /* list_parms: %empty  */
-#line 126 "analyse_syntaxique.y"
-        { (yyval.l_parm) = NULL; }
-#line 1757 "analyse_syntaxique.c"
-    break;
-
-  case 18: /* ecrire: ECRIRE PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE POINT_VIRGULE  */
+  case 18: /* list_parms: %empty  */
 #line 129 "analyse_syntaxique.y"
+        { (yyval.l_parm) = NULL; }
+#line 1770 "analyse_syntaxique.c"
+    break;
+
+  case 19: /* ecrire: ECRIRE PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE POINT_VIRGULE  */
+#line 132 "analyse_syntaxique.y"
                                                                           {
 	
 	(yyval.inst) =creer_n_ecrire((yyvsp[-2].exp));
 }
-#line 1766 "analyse_syntaxique.c"
+#line 1779 "analyse_syntaxique.c"
     break;
 
-  case 19: /* liste_expr: expr  */
-#line 135 "analyse_syntaxique.y"
+  case 20: /* liste_expr: expr  */
+#line 138 "analyse_syntaxique.y"
                 { (yyval.l_exp) = creerListeExpr((yyvsp[0].exp)); }
-#line 1772 "analyse_syntaxique.c"
+#line 1785 "analyse_syntaxique.c"
     break;
 
-  case 20: /* liste_expr: expr VIRGULE liste_expr  */
-#line 136 "analyse_syntaxique.y"
+  case 21: /* liste_expr: expr VIRGULE liste_expr  */
+#line 139 "analyse_syntaxique.y"
                                 { (yyval.l_exp) = ajouterListe((yyvsp[0].l_exp), (yyvsp[-2].exp)); }
-#line 1778 "analyse_syntaxique.c"
+#line 1791 "analyse_syntaxique.c"
     break;
 
-  case 21: /* liste_expr: %empty  */
-#line 137 "analyse_syntaxique.y"
+  case 22: /* liste_expr: %empty  */
+#line 140 "analyse_syntaxique.y"
         { (yyval.l_exp) = NULL; }
-#line 1784 "analyse_syntaxique.c"
+#line 1797 "analyse_syntaxique.c"
     break;
 
-  case 22: /* facteur: ENTIER  */
-#line 141 "analyse_syntaxique.y"
+  case 23: /* facteur: ENTIER  */
+#line 144 "analyse_syntaxique.y"
                { (yyval.exp) = creer_n_entier((yyvsp[0].entier)); }
-#line 1790 "analyse_syntaxique.c"
+#line 1803 "analyse_syntaxique.c"
     break;
 
-  case 23: /* facteur: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE  */
-#line 142 "analyse_syntaxique.y"
-                                                     { (yyval.exp) = (yyvsp[-1].exp); }
-#line 1796 "analyse_syntaxique.c"
-    break;
-
-  case 24: /* facteur: IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE  */
-#line 143 "analyse_syntaxique.y"
-                                                                       { (yyval.exp) = creer_n_appel_fonction((yyvsp[-3].string), creer_n_liste_expr((yyvsp[-1].l_exp))); }
-#line 1802 "analyse_syntaxique.c"
-    break;
-
-  case 25: /* produit: facteur  */
-#line 147 "analyse_syntaxique.y"
-                { (yyval.exp) = (yyvsp[0].exp); }
-#line 1808 "analyse_syntaxique.c"
-    break;
-
-  case 26: /* produit: produit FOIS facteur  */
-#line 148 "analyse_syntaxique.y"
-                             { (yyval.exp) =creer_n_operation("*", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
-#line 1814 "analyse_syntaxique.c"
-    break;
-
-  case 27: /* produit: produit DIVISER facteur  */
-#line 149 "analyse_syntaxique.y"
-                                { (yyval.exp) =creer_n_operation("/", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
-#line 1820 "analyse_syntaxique.c"
-    break;
-
-  case 28: /* expr: expr FOIS produit  */
-#line 153 "analyse_syntaxique.y"
-                          { (yyval.exp) =creer_n_operation("*", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1826 "analyse_syntaxique.c"
-    break;
-
-  case 29: /* expr: expr DIVISER produit  */
-#line 154 "analyse_syntaxique.y"
-                             { (yyval.exp) =creer_n_operation("/", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1832 "analyse_syntaxique.c"
-    break;
-
-  case 30: /* expr: expr PLUS produit  */
-#line 155 "analyse_syntaxique.y"
-                          { (yyval.exp) =creer_n_operation("+", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1838 "analyse_syntaxique.c"
-    break;
-
-  case 31: /* expr: expr MOINS produit  */
-#line 156 "analyse_syntaxique.y"
-                           { (yyval.exp) =creer_n_operation("-", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
-#line 1844 "analyse_syntaxique.c"
-    break;
-
-  case 32: /* expr: expr MODULO produit  */
-#line 157 "analyse_syntaxique.y"
-                            { (yyval.exp) =creer_n_operation("%", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
-#line 1850 "analyse_syntaxique.c"
-    break;
-
-  case 33: /* expr: NON expr  */
-#line 158 "analyse_syntaxique.y"
-                 { (yyval.exp) = creer_n_non((yyvsp[0].exp)); }
-#line 1856 "analyse_syntaxique.c"
-    break;
-
-  case 34: /* expr: IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE  */
-#line 159 "analyse_syntaxique.y"
-                                                                       { (yyval.exp) = creer_n_appel_fonction((yyvsp[-3].string), creer_n_liste_expr((yyvsp[-1].l_exp))); }
-#line 1862 "analyse_syntaxique.c"
-    break;
-
-  case 35: /* expr: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE  */
-#line 160 "analyse_syntaxique.y"
-                                                     { (yyval.exp) = (yyvsp[-1].exp); }
-#line 1868 "analyse_syntaxique.c"
-    break;
-
-  case 36: /* expr: ENTIER  */
-#line 161 "analyse_syntaxique.y"
-               { (yyval.exp) = creer_n_entier((yyvsp[0].entier)); }
-#line 1874 "analyse_syntaxique.c"
-    break;
-
-  case 37: /* expr: IDENTIFIANT  */
-#line 162 "analyse_syntaxique.y"
+  case 24: /* facteur: IDENTIFIANT  */
+#line 145 "analyse_syntaxique.y"
                     { (yyval.exp) = creer_n_identifiant((yyvsp[0].string)); }
-#line 1880 "analyse_syntaxique.c"
+#line 1809 "analyse_syntaxique.c"
     break;
 
-  case 38: /* expr: FAUX  */
+  case 25: /* facteur: MOINS ENTIER  */
+#line 146 "analyse_syntaxique.y"
+                     { (yyval.exp) = creer_n_entier(-(yyvsp[0].entier)); }
+#line 1815 "analyse_syntaxique.c"
+    break;
+
+  case 26: /* facteur: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE  */
+#line 147 "analyse_syntaxique.y"
+                                                     { (yyval.exp) = (yyvsp[-1].exp); }
+#line 1821 "analyse_syntaxique.c"
+    break;
+
+  case 27: /* facteur: IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE  */
+#line 148 "analyse_syntaxique.y"
+                                                                       { (yyval.exp) = creer_n_appel_fonction((yyvsp[-3].string), creer_n_liste_expr((yyvsp[-1].l_exp))); }
+#line 1827 "analyse_syntaxique.c"
+    break;
+
+  case 28: /* produit: facteur  */
+#line 152 "analyse_syntaxique.y"
+                { (yyval.exp) = (yyvsp[0].exp); }
+#line 1833 "analyse_syntaxique.c"
+    break;
+
+  case 29: /* produit: produit FOIS facteur  */
+#line 153 "analyse_syntaxique.y"
+                             { (yyval.exp) =creer_n_operation("*", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
+#line 1839 "analyse_syntaxique.c"
+    break;
+
+  case 30: /* produit: produit DIVISER facteur  */
+#line 154 "analyse_syntaxique.y"
+                                { (yyval.exp) =creer_n_operation("/", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
+#line 1845 "analyse_syntaxique.c"
+    break;
+
+  case 31: /* expr: expr FOIS produit  */
+#line 158 "analyse_syntaxique.y"
+                          { (yyval.exp) =creer_n_operation("*", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1851 "analyse_syntaxique.c"
+    break;
+
+  case 32: /* expr: expr DIVISER produit  */
+#line 159 "analyse_syntaxique.y"
+                             { (yyval.exp) =creer_n_operation("/", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1857 "analyse_syntaxique.c"
+    break;
+
+  case 33: /* expr: expr PLUS produit  */
+#line 160 "analyse_syntaxique.y"
+                          { (yyval.exp) =creer_n_operation("+", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1863 "analyse_syntaxique.c"
+    break;
+
+  case 34: /* expr: expr MOINS produit  */
+#line 161 "analyse_syntaxique.y"
+                           { (yyval.exp) =creer_n_operation("-", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
+#line 1869 "analyse_syntaxique.c"
+    break;
+
+  case 35: /* expr: expr MODULO produit  */
+#line 162 "analyse_syntaxique.y"
+                            { (yyval.exp) =creer_n_operation("%", (yyvsp[-2].exp) , (yyvsp[0].exp)); }
+#line 1875 "analyse_syntaxique.c"
+    break;
+
+  case 36: /* expr: MOINS ENTIER  */
 #line 163 "analyse_syntaxique.y"
-             {	(yyval.exp) = creer_n_booleen(0); }
-#line 1886 "analyse_syntaxique.c"
+                     { (yyval.exp) = creer_n_entier(-(yyvsp[0].entier)); }
+#line 1881 "analyse_syntaxique.c"
     break;
 
-  case 39: /* expr: VRAI  */
+  case 37: /* expr: NON expr  */
 #line 164 "analyse_syntaxique.y"
-             { (yyval.exp) = creer_n_booleen(1); }
-#line 1892 "analyse_syntaxique.c"
+                 { (yyval.exp) = creer_n_non((yyvsp[0].exp)); }
+#line 1887 "analyse_syntaxique.c"
     break;
 
-  case 40: /* affectation: IDENTIFIANT EGALE expr POINT_VIRGULE  */
+  case 38: /* expr: IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE  */
+#line 165 "analyse_syntaxique.y"
+                                                                       { (yyval.exp) = creer_n_appel_fonction((yyvsp[-3].string), creer_n_liste_expr((yyvsp[-1].l_exp))); }
+#line 1893 "analyse_syntaxique.c"
+    break;
+
+  case 39: /* expr: PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE  */
+#line 166 "analyse_syntaxique.y"
+                                                     { (yyval.exp) = (yyvsp[-1].exp); }
+#line 1899 "analyse_syntaxique.c"
+    break;
+
+  case 40: /* expr: ENTIER  */
+#line 167 "analyse_syntaxique.y"
+               { (yyval.exp) = creer_n_entier((yyvsp[0].entier)); }
+#line 1905 "analyse_syntaxique.c"
+    break;
+
+  case 41: /* expr: IDENTIFIANT  */
 #line 168 "analyse_syntaxique.y"
+                    { (yyval.exp) = creer_n_identifiant((yyvsp[0].string)); }
+#line 1911 "analyse_syntaxique.c"
+    break;
+
+  case 42: /* expr: FAUX  */
+#line 169 "analyse_syntaxique.y"
+             {	(yyval.exp) = creer_n_booleen(0); }
+#line 1917 "analyse_syntaxique.c"
+    break;
+
+  case 43: /* expr: VRAI  */
+#line 170 "analyse_syntaxique.y"
+             { (yyval.exp) = creer_n_booleen(1); }
+#line 1923 "analyse_syntaxique.c"
+    break;
+
+  case 44: /* affectation: IDENTIFIANT EGALE expr POINT_VIRGULE  */
+#line 174 "analyse_syntaxique.y"
                                          { (yyval.inst) = creer_n_affectation((yyvsp[-3].string), (yyvsp[-1].exp)); }
-#line 1898 "analyse_syntaxique.c"
+#line 1929 "analyse_syntaxique.c"
     break;
 
-  case 41: /* conditionSi: SI PARENTHESE_OUVRANTE expr_cond PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
-#line 172 "analyse_syntaxique.y"
+  case 45: /* conditionSi: SI PARENTHESE_OUVRANTE expr_cond PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
+#line 178 "analyse_syntaxique.y"
                                                                                                          { (yyval.l_exp) = creerListeExpr(creer_n_condition(0, (yyvsp[-4].exp), (yyvsp[-1].l_inst))); }
-#line 1904 "analyse_syntaxique.c"
+#line 1935 "analyse_syntaxique.c"
     break;
 
-  case 42: /* conditionSi: conditionSi SINON conditionSi  */
-#line 173 "analyse_syntaxique.y"
+  case 46: /* conditionSi: conditionSi SINON conditionSi  */
+#line 179 "analyse_syntaxique.y"
                                       { 
         (yyvsp[0].l_exp)->value->u.condition->type = 1;  // met le type a 1 pour dire que c'est un sinon si
         (yyval.l_exp) = ajouterListeElementList((yyvsp[0].l_exp), (yyvsp[-2].l_exp)); 
     }
-#line 1913 "analyse_syntaxique.c"
+#line 1944 "analyse_syntaxique.c"
     break;
 
-  case 43: /* conditionSi: conditionSi SINON BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
-#line 177 "analyse_syntaxique.y"
+  case 47: /* conditionSi: conditionSi SINON BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
+#line 183 "analyse_syntaxique.y"
                                                                        { 
         (yyval.l_exp) = creerListeExpr(creer_n_condition(2, NULL, (yyvsp[-1].l_inst))); // met le type a 2 pour dire que c'est un sinon
         (yyval.l_exp) = ajouterListeElementList((yyval.l_exp), (yyvsp[-4].l_exp));
     }
-#line 1922 "analyse_syntaxique.c"
+#line 1953 "analyse_syntaxique.c"
     break;
 
-  case 44: /* cond: conditionSi  */
-#line 184 "analyse_syntaxique.y"
+  case 48: /* cond: conditionSi  */
+#line 190 "analyse_syntaxique.y"
                     { (yyval.inst) = creer_n_cond((yyvsp[0].l_exp)); }
-#line 1928 "analyse_syntaxique.c"
+#line 1959 "analyse_syntaxique.c"
     break;
 
-  case 45: /* cond: TANTQUE PARENTHESE_OUVRANTE expr_cond PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
-#line 185 "analyse_syntaxique.y"
+  case 49: /* cond: TANTQUE PARENTHESE_OUVRANTE expr_cond PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT  */
+#line 191 "analyse_syntaxique.y"
                                                                                                               {
         (yyval.inst) = creer_n_cond(creerListeExpr(creer_n_condition(3, (yyvsp[-4].exp), (yyvsp[-1].l_inst))));
     }
-#line 1936 "analyse_syntaxique.c"
+#line 1967 "analyse_syntaxique.c"
     break;
 
-  case 46: /* expr_cond: expr  */
-#line 190 "analyse_syntaxique.y"
-             { (yyval.exp) = (yyvsp[0].exp); }
-#line 1942 "analyse_syntaxique.c"
-    break;
-
-  case 47: /* expr_cond: expr_cond LE expr_cond  */
-#line 191 "analyse_syntaxique.y"
-                               { (yyval.exp) =creer_n_operation("<=", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1948 "analyse_syntaxique.c"
-    break;
-
-  case 48: /* expr_cond: expr_cond LT expr_cond  */
-#line 192 "analyse_syntaxique.y"
-                               { (yyval.exp) =creer_n_operation("<", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1954 "analyse_syntaxique.c"
-    break;
-
-  case 49: /* expr_cond: expr_cond GT expr_cond  */
-#line 193 "analyse_syntaxique.y"
-                               { (yyval.exp) =creer_n_operation(">", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1960 "analyse_syntaxique.c"
-    break;
-
-  case 50: /* expr_cond: expr_cond GE expr_cond  */
-#line 194 "analyse_syntaxique.y"
-                               { (yyval.exp) =creer_n_operation(">=", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1966 "analyse_syntaxique.c"
-    break;
-
-  case 51: /* expr_cond: expr_cond OU expr_cond  */
-#line 195 "analyse_syntaxique.y"
-                               { (yyval.exp) =creer_n_operation("OU", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1972 "analyse_syntaxique.c"
-    break;
-
-  case 52: /* expr_cond: expr_cond ET expr_cond  */
+  case 50: /* expr_cond: expr  */
 #line 196 "analyse_syntaxique.y"
-                               { (yyval.exp) =creer_n_operation("ET", (yyvsp[-2].exp), (yyvsp[0].exp)); }
-#line 1978 "analyse_syntaxique.c"
+             { (yyval.exp) = (yyvsp[0].exp); }
+#line 1973 "analyse_syntaxique.c"
     break;
 
-  case 53: /* retourner: RETOURNER expr POINT_VIRGULE  */
+  case 51: /* expr_cond: expr_cond LE expr_cond  */
+#line 197 "analyse_syntaxique.y"
+                               { (yyval.exp) =creer_n_operation("<=", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1979 "analyse_syntaxique.c"
+    break;
+
+  case 52: /* expr_cond: expr_cond LT expr_cond  */
+#line 198 "analyse_syntaxique.y"
+                               { (yyval.exp) =creer_n_operation("<", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1985 "analyse_syntaxique.c"
+    break;
+
+  case 53: /* expr_cond: expr_cond GT expr_cond  */
+#line 199 "analyse_syntaxique.y"
+                               { (yyval.exp) =creer_n_operation(">", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1991 "analyse_syntaxique.c"
+    break;
+
+  case 54: /* expr_cond: expr_cond GE expr_cond  */
 #line 200 "analyse_syntaxique.y"
-                                     { (yyval.inst) = creer_n_retourner((yyvsp[-1].exp)); }
-#line 1984 "analyse_syntaxique.c"
+                               { (yyval.exp) =creer_n_operation(">=", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 1997 "analyse_syntaxique.c"
     break;
 
-  case 54: /* retourner: RETOURNER expr  */
+  case 55: /* expr_cond: expr_cond OU expr_cond  */
 #line 201 "analyse_syntaxique.y"
+                               { (yyval.exp) =creer_n_operation("OU", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 2003 "analyse_syntaxique.c"
+    break;
+
+  case 56: /* expr_cond: expr_cond ET expr_cond  */
+#line 202 "analyse_syntaxique.y"
+                               { (yyval.exp) =creer_n_operation("ET", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 2009 "analyse_syntaxique.c"
+    break;
+
+  case 57: /* expr_cond: expr_cond DIFFERENT expr_cond  */
+#line 203 "analyse_syntaxique.y"
+                                      { (yyval.exp) =creer_n_operation("!=", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 2015 "analyse_syntaxique.c"
+    break;
+
+  case 58: /* expr_cond: expr_cond EQ expr_cond  */
+#line 204 "analyse_syntaxique.y"
+                               { (yyval.exp) =creer_n_operation("==", (yyvsp[-2].exp), (yyvsp[0].exp)); }
+#line 2021 "analyse_syntaxique.c"
+    break;
+
+  case 59: /* retourner: RETOURNER expr POINT_VIRGULE  */
+#line 208 "analyse_syntaxique.y"
+                                     { (yyval.inst) = creer_n_retourner((yyvsp[-1].exp)); }
+#line 2027 "analyse_syntaxique.c"
+    break;
+
+  case 60: /* retourner: RETOURNER expr  */
+#line 209 "analyse_syntaxique.y"
                        { (yyval.inst) = creer_n_retourner((yyvsp[0].exp)); }
-#line 1990 "analyse_syntaxique.c"
+#line 2033 "analyse_syntaxique.c"
     break;
 
-  case 55: /* type: TYPE_ENTIER  */
-#line 205 "analyse_syntaxique.y"
+  case 61: /* type: TYPE_ENTIER  */
+#line 213 "analyse_syntaxique.y"
                             { (yyval.string) = "ENTIER"; }
-#line 1996 "analyse_syntaxique.c"
+#line 2039 "analyse_syntaxique.c"
     break;
 
-  case 56: /* type: TYPE_BOOLEEN  */
-#line 206 "analyse_syntaxique.y"
+  case 62: /* type: TYPE_BOOLEEN  */
+#line 214 "analyse_syntaxique.y"
                         { (yyval.string) = "BOOLEEN"; }
-#line 2002 "analyse_syntaxique.c"
+#line 2045 "analyse_syntaxique.c"
     break;
 
 
-#line 2006 "analyse_syntaxique.c"
+#line 2049 "analyse_syntaxique.c"
 
         default: break;
       }
@@ -2083,7 +2126,7 @@ yyerrlab:
           }
         yyerror (yymsgp);
         if (yysyntax_error_status == YYENOMEM)
-          goto yyexhaustedlab;
+          YYNOMEM;
       }
     }
 
@@ -2119,6 +2162,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -2183,7 +2227,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -2191,24 +2235,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if 1
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
-#endif
+  goto yyreturnlab;
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -2238,7 +2280,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 210 "analyse_syntaxique.y"
+#line 218 "analyse_syntaxique.y"
 
 
 int yyerror(const char *s) {

@@ -45,6 +45,7 @@ l_parm *ajouterListeParm(l_parm *liste, n_parm *parm)
 	return l;
 }
 
+
 // affiche l'entier avec sa valeur après un certain nombres d'espaces et un retour à la ligne
 void afficher(char *s, int indent)
 {
@@ -117,7 +118,8 @@ void afficher_n_fonction(n_fonction *fonction, int indent)
 	afficher("<fonction>", indent);
 	afficher_type(fonction->type, indent + 1);
 	afficher_identifiant(fonction->nom, indent + 1);
-	afficher_n_liste_parm(fonction->parms, indent + 1);
+	if(fonction->parms != NULL)
+		afficher_n_liste_parm(fonction->parms, indent + 1);
 	afficher_n_l_instructions(fonction->instructions, indent + 1);
 	afficher("</fonction>", indent);
 }
@@ -174,6 +176,12 @@ void afficher_n_instruction(n_instruction *instruction, int indent)
 		afficher_identifiant(instruction->u.affectation->nom, indent + 1);
 		afficher_n_exp(instruction->u.affectation->exp, indent + 1);
 		afficher("</affectation>", indent);
+	}
+	else if (instruction->type_instruction == i_expression)
+	{
+		afficher("<expression>", indent);
+		afficher_n_exp(instruction->u.exp, indent + 1);
+		afficher("</expression>", indent);
 	}
 }
 
@@ -360,6 +368,14 @@ n_instruction *creer_n_affectation(char *nom, n_exp *exp)
 	n->type_instruction = i_affectation;
 	n->u.affectation = aff;
 	return n;
+}
+
+n_instruction *creer_n_exp(n_exp *exp)
+{
+	n_instruction *ni = malloc(sizeof(n_exp));
+	ni->u.exp = exp;
+	ni->type_instruction = i_expression;
+	return ni;
 }
 
 n_instruction *creer_n_fonction(char *type, char *nom, l_parm *parms, n_l_instructions *instructions)
