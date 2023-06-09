@@ -94,7 +94,9 @@ int token_fermes[] = {
   EGALE,
   TANTQUE,
   VIRGULE,
-  NON
+  NON,
+  DIFFERENT,
+  EQ
 };
 char *str_token[] = {
   "+",
@@ -118,6 +120,7 @@ char *str_token[] = {
   ">",
   ">=",
   "!=",
+  "==",
   "OU",
   "ET",
   "SINON",

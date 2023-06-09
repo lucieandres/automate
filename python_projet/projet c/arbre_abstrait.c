@@ -206,7 +206,7 @@ void afficher_cond(n_exp *exp, int indent)
 	if (cond->type == 0)
 	{
 		afficher("<si>", indent);
-		afficher_n_operation(cond->condition->u.operation, indent + 1);
+		afficher_n_exp(cond->condition, indent + 1);
 		afficher("</si>", indent);
 		afficher("<alors>", indent);
 		afficher_n_l_instructions(cond->block, indent + 1);
@@ -215,7 +215,7 @@ void afficher_cond(n_exp *exp, int indent)
 	else if (cond->type == 1)
 	{
 		afficher("<sinon_si>", indent);
-		afficher_n_operation(cond->condition->u.operation, indent + 1);
+		afficher_n_exp(cond->condition, indent + 1);
 		afficher("</sinon_si>", indent);
 		afficher("<alors>", indent);
 		afficher_n_l_instructions(cond->block, indent + 1);
@@ -230,7 +230,7 @@ void afficher_cond(n_exp *exp, int indent)
 	else if (cond->type == 3)
 	{
 		afficher("<tant_que>", indent);
-		afficher_n_operation(cond->condition->u.operation, indent + 1);
+		afficher_n_exp(cond->condition, indent + 1);
 		afficher("</tant_que>", indent);
 		afficher("<alors>", indent);
 		afficher_n_l_instructions(cond->block, indent + 1);
@@ -272,6 +272,12 @@ void afficher_n_exp(n_exp *exp, int indent)
 		afficher("<non>", indent);
 		afficher_n_exp(exp->u.exp, indent + 1);
 		afficher("</non>", indent);
+	}
+	else if (exp->type_exp == i_moins)
+	{
+		afficher("<moins>", indent);
+		afficher_n_exp(exp->u.exp, indent + 1);
+		afficher("</moins>", indent);
 	}
 }
 
@@ -332,7 +338,8 @@ void afficher_n_declaration(n_declaration *declaration, int indent)
 {
 	afficher_type(declaration->type_declaration, indent + 1);
 	afficher_identifiant(declaration->nom, indent + 1);
-	afficher_n_exp(declaration->exp, indent + 1);
+	if(declaration->exp != NULL)
+		afficher_n_exp(declaration->exp, indent + 1);
 }
 
 n_programme *creer_n_programme(n_l_instructions *instructions)
@@ -433,6 +440,15 @@ n_exp *creer_n_liste_expr(l_expr *liste)
 	n_exp *n = malloc(sizeof(n_exp));
 	n->type_exp = i_liste_expr;
 	n->u.liste_expr = liste;
+	return n;
+}
+
+n_exp *creer_n_moins(n_exp *exp)
+{
+
+	n_exp *n = malloc(sizeof(n_exp));
+	n->type_exp = i_moins;
+	n->u.exp = exp;
 	return n;
 }
 

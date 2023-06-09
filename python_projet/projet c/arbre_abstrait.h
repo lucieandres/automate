@@ -94,7 +94,8 @@ struct n_exp{
     i_liste_expr,
     i_appel_fonction,
     i_condition,
-    i_non
+    i_non,
+    i_moins
   } type_exp; // pour le moment une expression  peut-être une opération ou un entier
   union{ 
     n_operation* operation;
@@ -158,6 +159,7 @@ n_exp *creer_n_condition(int type, n_exp* condition, n_l_instructions *block);
 n_instruction *creer_n_cond(l_expr *cond);
 n_instruction *creer_n_retourner(n_exp *exp);
 n_exp *creer_n_non(n_exp* exp);
+n_exp *creer_n_moins(n_exp* exp);
 n_instruction *creer_n_affectation(char *nom, n_exp* exp);
 n_instruction *creer_n_exp(n_exp* exp);
 
