@@ -87,6 +87,7 @@ typedef struct Condition{
 
 struct n_exp{
   enum { 
+    i_lire,
     i_operation,
     i_entier,
     i_identifiant,
@@ -148,6 +149,7 @@ n_instruction *creer_n_fonction(char *type, char *nom, l_parm *parms, n_l_instru
 n_l_instructions* creer_n_l_instructions(n_instruction* instruction ,n_l_instructions* instructions);
 n_instruction *creer_n_declaration(char *type_declaration, char *nom, n_exp *exp);
 n_instruction* creer_n_ecrire(n_exp* exp);
+n_exp* creer_n_lire();
 n_exp* creer_n_liste_expr(l_expr* liste);
 n_exp *creer_n_appel_fonction(char *nom, n_exp *exp);
 n_exp* creer_n_entier(int valeur);

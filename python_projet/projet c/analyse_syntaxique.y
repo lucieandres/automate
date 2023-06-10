@@ -48,6 +48,7 @@ n_programme* arbre_abstrait;
 %token RETOURNER
 %token <entier> ENTIER
 %token ECRIRE
+%token LIRE
 %token FIN 0
 %token TYPE_BOOLEEN
 %token VRAI
@@ -66,6 +67,7 @@ n_programme* arbre_abstrait;
 %type <l_inst> listeInstructions
 %type <inst> instruction
 %type <inst> ecrire
+%type <exp> lire
 %type <inst> affectation
 
 %type <inst> fonction
@@ -146,6 +148,7 @@ facteur:
     |   MOINS ENTIER { $$ = creer_n_entier(-$2); }
     |   PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE { $$ = $2; }
     |   IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE { $$ = creer_n_appel_fonction($1, creer_n_liste_expr($3)); }
+    |   lire { $$ = $1; }
 ;
 
 produit:
@@ -153,6 +156,8 @@ produit:
     |   produit FOIS facteur { $$ =creer_n_operation("*", $1 , $3); }
     |   produit DIVISER facteur { $$ =creer_n_operation("/", $1 , $3); }
 ;
+
+lire : LIRE PARENTHESE_OUVRANTE PARENTHESE_FERMANTE { $$ = creer_n_lire(); }
 
 expr: 
         expr FOIS produit { $$ =creer_n_operation("*", $1, $3); }
@@ -177,6 +182,7 @@ expr:
     |   expr ET expr { $$ =creer_n_operation("ET", $1, $3); }
     |   expr DIFFERENT expr { $$ =creer_n_operation("!=", $1, $3); }
     |   expr EQ expr { $$ =creer_n_operation("==", $1, $3); }
+    |   lire { $$ = $1; }
 ;
 
 affectation:

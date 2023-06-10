@@ -244,6 +244,11 @@ void afficher_n_exp(n_exp *exp, int indent)
 	{
 		afficher_n_operation(exp->u.operation, indent);
 	}
+	else if (exp->type_exp == i_lire)
+	{
+		afficher("<lire>", indent);
+		afficher("</lire>", indent);
+	}
 	else if (exp->type_exp == i_entier)
 	{
 		afficher_entier(exp->u.valeur, indent);
@@ -362,6 +367,13 @@ n_instruction *creer_n_ecrire(n_exp *exp)
 	n_instruction *n = malloc(sizeof(n_instruction));
 	n->type_instruction = i_ecrire;
 	n->u.exp = exp;
+	return n;
+}
+
+n_exp *creer_n_lire()
+{
+	n_exp *n = malloc(sizeof(n_exp));
+	n->type_exp = i_lire;
 	return n;
 }
 

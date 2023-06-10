@@ -29,6 +29,7 @@ espace               [ \t\r\n]
 "{"                  { return BLOC_OUVRANT; }
 "}"                  { return BLOC_FERMANT; }
 "ecrire"             { return ECRIRE;              }
+"lire"             { return LIRE;              }
 ";"                  { return POINT_VIRGULE;       }
 "entier"             { return TYPE_ENTIER;       }
 "booleen"            { return TYPE_BOOLEEN;       }
@@ -77,6 +78,7 @@ int token_fermes[] = {
   BLOC_OUVRANT,
   BLOC_FERMANT,
   ECRIRE,
+  LIRE,
   POINT_VIRGULE,
   TYPE_ENTIER,
   TYPE_BOOLEEN,
@@ -109,6 +111,7 @@ char *str_token[] = {
   "{",
   "}",
   "ECRIRE",
+  "LIRE",
   ";",
   "ENTIER",
   "BOOLEEN",

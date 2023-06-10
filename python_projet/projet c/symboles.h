@@ -74,18 +74,19 @@ extern int yydebug;
     RETOURNER = 275,               /* RETOURNER  */
     ENTIER = 276,                  /* ENTIER  */
     ECRIRE = 277,                  /* ECRIRE  */
-    TYPE_BOOLEEN = 278,            /* TYPE_BOOLEEN  */
-    VRAI = 279,                    /* VRAI  */
-    FAUX = 280,                    /* FAUX  */
-    TANTQUE = 281,                 /* TANTQUE  */
-    NON = 282,                     /* NON  */
-    DIVISER = 283,                 /* DIVISER  */
-    MODULO = 284,                  /* MODULO  */
-    SINON = 285,                   /* SINON  */
-    LT = 286,                      /* LT  */
-    BLOC_OUVRANT = 287,            /* BLOC_OUVRANT  */
-    BLOC_FERMANT = 288,            /* BLOC_FERMANT  */
-    VIRGULE = 289                  /* VIRGULE  */
+    LIRE = 278,                    /* LIRE  */
+    TYPE_BOOLEEN = 279,            /* TYPE_BOOLEEN  */
+    VRAI = 280,                    /* VRAI  */
+    FAUX = 281,                    /* FAUX  */
+    TANTQUE = 282,                 /* TANTQUE  */
+    NON = 283,                     /* NON  */
+    DIVISER = 284,                 /* DIVISER  */
+    MODULO = 285,                  /* MODULO  */
+    SINON = 286,                   /* SINON  */
+    LT = 287,                      /* LT  */
+    BLOC_OUVRANT = 288,            /* BLOC_OUVRANT  */
+    BLOC_FERMANT = 289,            /* BLOC_FERMANT  */
+    VIRGULE = 290                  /* VIRGULE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -106,7 +107,7 @@ union YYSTYPE
     l_parm* l_parm;
     char* string;
 
-#line 110 "symboles.h"
+#line 111 "symboles.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
