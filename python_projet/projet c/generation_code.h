@@ -1,6 +1,7 @@
 #ifndef __GENERATION_CODE__
 #define __GENERATION_CODE__
 
+#include "table_symboles.h"
 
 void nasm_prog(n_programme *n);
 void nasm_liste_variable_name(n_l_instructions *n);
@@ -16,5 +17,7 @@ void nasm_define_symbole(n_l_instructions *n);
 void nasm_define_fonction(n_fonction *n);
 void nasm_appel_fonction(n_appel_fonction *n);
 void nasm_define_all_fonction();
+char* toStringType(int type);
+char* toString(Symbole * s);
 
 #endif

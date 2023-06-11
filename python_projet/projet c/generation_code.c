@@ -178,16 +178,23 @@ void nasm_instruction(n_instruction* n){
       }
       else if(n->u.exp->type_exp == i_appel_fonction)
       {
-        printf(";%d\n", trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom));
-        printf(";%d\n", symboles[indexFonction]->type);
-        if( trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom) == symboles[indexFonction]->type)
+        printf(";%s\n", toString(symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]));
+        printf(";%s\n", toString(symboles[indexFonction]));
+        // printf(";%s\n", symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]->nom);
+        // printf(";%d\n", trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom));
+        // printf(";%s\n", symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]->n->type);
+        // printf(";%s\n", symboles[indexFonction]->nom);
+        // printf(";%d\n", symboles[indexFonction]->type);
+        // printf(";%s\n", symboles[indexFonction]->n->type);
+
+        if( trouver_type_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom) == symboles[indexFonction]->type)
         {
           nasm_exp(n->u.exp);
           nasm_commande("pop", "eax", NULL, NULL, NULL); //on dépile la valeur d'expression sur eax
           nasm_commande("ret", NULL, NULL, NULL, "retour de fonction");
         }
         else {
-          printf("Erreur : type de retour de fonction la fonction appelée est incorrect");
+          printf("Erreur : type de retour de fonction appelée et appelante no match");
           exit(1);
         }
       }
@@ -530,4 +537,22 @@ int verif_type(n_operation* n) {
     }
   }
   return 0;
+}
+
+
+char * toStringType(int type) {
+    switch (type) {
+        case entier:
+            return "entier";
+        case booleen:
+            return "booleen";
+        default:
+            return "inconnu";
+    }
+}
+
+char * toString(Symbole *symbole) {
+    char *str = malloc(sizeof(char) * 100);
+    sprintf(str, "Symbole %s de type %s", symbole->nom, toStringType(symbole->type));
+    return str;
 }

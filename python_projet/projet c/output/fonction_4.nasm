@@ -9,8 +9,6 @@ global _start
 	push	120
 	pop	eax
 	call	iprintLF
-;2
-;fonction a l'index 0
 	push	0
 	pop	eax
 	ret		 ; retour de fonction

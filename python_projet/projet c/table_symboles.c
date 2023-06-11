@@ -30,7 +30,6 @@ void ajouter_symbole_booleen(Symbole *symboles[], int *nb_symboles, const char *
 
 int trouver_symbole(Symbole *symboles[], int nb_symboles, const char *nom) {
     for (int i = 0; i < nb_symboles; i++) {
-        printf(";Ajout du symbole %s\n", symboles[i]->nom);
         if (strcmp(symboles[i]->nom, nom) == 0) {
             return i;
         }

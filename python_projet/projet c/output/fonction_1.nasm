@@ -6,13 +6,10 @@ sinput:	resb	255	;reserve a 255 byte space in memory for the users input string
 section	.text
 global _start
 	_f:		 ; declaration de fonction
-;2
-;fonction a l'index 0
 	push	3
 	pop	eax
 	ret		 ; retour de fonction
 _start:
-;Ajout du symbole f
 	call	_f		 ; appel de fonction
 	push	eax
 	pop	eax

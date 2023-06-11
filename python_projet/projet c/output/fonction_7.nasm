@@ -8,8 +8,6 @@ global _start
 	_f:		 ; declaration de fonction
 	pop	eax
 	call	iprintLF
-;2
-;fonction a l'index 0
 	push	5
 	pop	eax
 	ret		 ; retour de fonction
