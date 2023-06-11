@@ -18,6 +18,8 @@ _start:
 	sete	al		 ; EG
 	movzx	eax, al
 	push	eax		 ; empile le résultat
+	pop	eax
+	cmp	eax, 0
 	je	endloop1
 	push	0
 	pop	eax
@@ -34,6 +36,8 @@ _start:
 	sete	al		 ; EG
 	movzx	eax, al
 	push	eax		 ; empile le résultat
+	pop	eax
+	cmp	eax, 0
 	je	endloop2
 	push	1
 	pop	eax

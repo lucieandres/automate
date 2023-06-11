@@ -11,6 +11,7 @@ void nasm_operation(n_operation* n);
 void nasm_condition(l_expr* n);
 void nasm_lire();
 int verif_type(n_operation* n);
+void setopcond(n_exp* n, char *label_debut, char *label_fin);
 
 
 #endif

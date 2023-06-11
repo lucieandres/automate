@@ -3,10 +3,12 @@
 #include <string.h>
 #include "arbre_abstrait.h"
 #include "generation_code.h"
+#include "table_symboles.h"
 
 //pour afficher le code uniquement si l'option afficher_nasm vaut 1
 #define printifm(format, ...) if(afficher_nasm){ printf(format, __VA_ARGS__); }
 static int labelgenerate = 0;
+static symbole * symboles[MAX_SYMBOLES];
 
 int afficher_nasm = 1;
 
@@ -103,6 +105,8 @@ void nasm_condition(l_expr* n) {
     
     nasm_commande(label_debut_p, NULL, NULL, NULL, NULL);  // Label du début de la boucle
     nasm_exp(condition->condition);  // Évaluation de la condition
+    nasm_commande("pop", "eax", NULL, NULL, NULL);  // Récupération de la valeur de la condition
+    nasm_commande("cmp", "eax", "0", NULL, NULL);  // Comparaison de la valeur de la condition avec 0
     nasm_commande("je", label_fin, NULL, NULL, NULL);  // Saut à la fin de la boucle si la condition est fausse
     
     nasm_liste_instructions(condition->block);  // Exécution des instructions de la boucle
@@ -110,6 +114,7 @@ void nasm_condition(l_expr* n) {
     
     nasm_commande(label_fin_p, NULL, NULL, NULL, NULL);  // Label de fin de la boucle
   }
+
   else if(condition->type == 0 || condition->type == 1)
   { //si
     labelgenerate++;
@@ -118,14 +123,12 @@ void nasm_condition(l_expr* n) {
     char *label_debut_p = malloc(sizeof(char) * 10);
     char *label_fin_p = malloc(sizeof(char) * 10);
 
-    sprintf(label_debut_p, "loop%d :", labelgenerate);
-    sprintf(label_fin_p, "endloop%d :", labelgenerate);
-    sprintf(label_debut, "loop%d", labelgenerate);
-    sprintf(label_fin, "endloop%d", labelgenerate);
-
-    nasm_commande("cmp", "eax", "0", NULL, NULL);
-    nasm_commande("je", label_debut, NULL, NULL, NULL);
-    if(n->next->value->u.condition->type == 1 || n->next->value->u.condition->type == 2)
+    sprintf(label_debut_p, "si%d :", labelgenerate);
+    sprintf(label_fin_p, "endsi%d :", labelgenerate);
+    sprintf(label_debut, "si%d", labelgenerate);
+    sprintf(label_fin, "endsi%d", labelgenerate);
+    setopcond(n->value, label_debut, label_fin);
+    if(n->next && (n->next->value->u.condition->type == 1 || n->next->value->u.condition->type == 2))
     {
       nasm_condition(n->next);
     }
@@ -138,6 +141,26 @@ void nasm_condition(l_expr* n) {
   { //else
     nasm_liste_instructions(condition->block);
   }
+}
+
+void setopcond(n_exp * n, char* label_debut, char* label_fin){
+  if(n->u.condition->condition && n->u.condition->condition->type_exp == i_condition)
+  {
+    Condition * condition = n->u.condition;
+    nasm_exp(condition->condition);  // Évaluation de la condition
+    nasm_commande("pop", "eax", NULL, NULL, NULL);  // Récupération de la valeur de la condition
+    nasm_commande("cmp", "eax", "0", NULL, NULL);  // Comparaison de la valeur de la condition avec 0
+  }
+  else if(n->u.condition->condition->type_exp == i_booleen) {
+    nasm_exp(n->u.condition->condition);
+    nasm_commande("pop", "eax", NULL, NULL, NULL);  // Récupération de la valeur de la condition
+    nasm_commande("cmp", "eax", "1", NULL, NULL);  // Comparaison de la valeur de la condition avec 0
+  }
+  else {
+    printf("Erreur : la condition doit être un booléen\n");
+    exit(1);
+  }
+  nasm_commande("je", label_debut, NULL, NULL, NULL);
 }
 
 void nasm_exp(n_exp* n){
@@ -326,7 +349,7 @@ int verif_type(n_operation* n) {
         if(n->exp2->u.exp->type_exp == i_operation) {
           verif_type(n->exp2->u.exp->u.operation);
         }
-      }
+      } 
       else {
         printf("Erreur : les deux opérandes doivent être des entiers\n");
         exit(1);
