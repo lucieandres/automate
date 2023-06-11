@@ -19,5 +19,6 @@ void nasm_appel_fonction(n_appel_fonction *n);
 void nasm_define_all_fonction();
 char* toStringType(int type);
 char* toString(Symbole * s);
+void verif_type_argu(l_expr *n, Symbole *s);
 
 #endif

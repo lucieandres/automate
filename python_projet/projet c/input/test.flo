@@ -1,5 +1,4 @@
-entier f(){
- ecrire(120);
+entier f(entier x, entier e, entier a, booleen b){
  retourner 0;
 }
-f();
+f(1,2,3,Vrai);

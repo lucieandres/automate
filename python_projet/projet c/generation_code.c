@@ -11,7 +11,9 @@ int labelgenerate = 0;
 int isFonction = 1;
 int indexFonction = -1;
 static Symbole * symboles[MAX_SYMBOLES];
+static variable * variables[MAX_SYMBOLES];
 int nb_symboles = 0;
+int nb_variables = 0;
 
 int afficher_nasm = 1;
 
@@ -67,7 +69,7 @@ void nasm_define_symbole(n_l_instructions *n) {
         //printifm("%s","\nsection\t.text\n");
         n_fonction *func = n->instruction->u.fonction;
         
-        char * func_name = malloc(strlen(func->nom) + 1);
+        char * func_name = malloc(sizeof(int)*(strlen(func->nom) + 1));
         sprintf(func_name, "_%s", func->nom);
         //printifm("%s %s\n","global", func_name);
         if(strcmp(func->type, "ENTIER") == 0)
@@ -81,6 +83,14 @@ void nasm_define_symbole(n_l_instructions *n) {
         else {
           printf("Erreur de type de variable");
           exit(1);
+        }
+        
+        symboles[nb_symboles-1]->nb_params=0;
+
+        l_parm *parm = func->parms;
+        while(parm != NULL) {
+          add_parameter_type_to_symbole(symboles, nb_symboles-1, parm->value);
+          parm = parm->next;
         }
       }
     }
@@ -106,7 +116,16 @@ void nasm_define_fonction(n_fonction *n)
   char * func_name = malloc(strlen(name) + 2);
   sprintf(func_name, "_%s:", name);
   nasm_commande(func_name, NULL, NULL, NULL, "declaration de fonction");
+  nasm_commande("push", "ebp", NULL, NULL, "empiler ebp");
+  nasm_commande("mov", "ebp", "esp", NULL, "mov ebp, esp");
+  if(symboles[trouver_symbole(symboles, nb_symboles, name)]->nb_params != 0){
+    char * taille = malloc(sizeof(int)+sizeof(char)*6);
+    sprintf(taille, "[ebp+%d]", symboles[trouver_symbole(symboles, nb_symboles, name)]->nb_params*4);
+    nasm_commande("mov", "eax", taille, NULL, "mov eax, 0");
+  }
+
   nasm_liste_instructions(n->instructions);
+
   isFonction = 0;
 }
 
@@ -116,13 +135,40 @@ void nasm_appel_fonction(n_appel_fonction *n)
   char * func_name = malloc(strlen(n->nom) + 1);
   sprintf(func_name, "_%s", n->nom);
   if(i!=-1) {
+    verif_type_argu(n->exp->u.liste_expr, symboles[i]);
+    
+    //empiler tous les arguments
+    l_expr *exp = n->exp->u.liste_expr;
+    int count = 0;
+    while (exp)
+    {
+      char* val = malloc(sizeof(int));
+      sprintf(val, "%d", exp->value->u.valeur);
+      nasm_commande("push", val, NULL, NULL, "empiler argument");
+      add_variable(variables, &nb_variables, symboles[i]->nom_p[count], 4*count);
+      printf(";%s", variables[nb_variables-1]->nom);
+      exp = exp->next;
+      count++;
+    }
+    // push ebp
+    // mov ebp, esp
     if(symboles[i]->type == entier)
     {
       nasm_commande("call", func_name, NULL, NULL, "appel de fonction");
+      if(symboles[indexFonction]->nb_params !=0) {
+        char* taille = malloc(sizeof(int));
+        sprintf(taille, "%d", symboles[indexFonction]->nb_params * 4);
+        nasm_commande("add", "esp", taille, NULL, "dépiler argument");
+      }
     }
     else if(symboles[i]->type == booleen)
     {
       nasm_commande("call", func_name, NULL, NULL, "appel de fonction");
+      if(symboles[indexFonction]->nb_params !=0) {
+        char* taille = malloc(sizeof(int));
+        sprintf(taille, "%d", symboles[indexFonction]->nb_params * 4);
+        nasm_commande("add", "esp", taille, NULL, "dépiler argument");
+      }
     }
     else {
       printf("Erreur de type de variable");
@@ -133,6 +179,34 @@ void nasm_appel_fonction(n_appel_fonction *n)
     printf("Erreur : fonction non déclarée");
     exit(1);
   }
+}
+
+void verif_type_argu(l_expr *n, Symbole* s)
+{
+  int count = 0;
+  l_expr *exp = n;
+  while (exp)
+  {
+    // printf(";count %d\n", count);
+    // printf(";type p %d\n", s->type_p[count]);
+    // printf(";type exp %d\n", exp->value->type_exp);
+    if(count >= s->nb_params)
+    {
+      printf("Erreur : nombre de paramètres incorrect");
+      exit(1);
+    }
+    if((exp->value->type_exp == i_entier && s->type_p[count] == entier_v) || (exp->value->type_exp == i_booleen && s->type_p[count] == booleen_v))
+    {
+      count++;
+      exp = exp->next;
+    }
+    else
+    {
+      printf("Erreur : type de paramètre incorrect");
+      exit(1);
+    }
+  }
+  
 }
 
 void nasm_liste_variable_name(n_l_instructions *n)
@@ -189,7 +263,17 @@ void nasm_instruction(n_instruction* n){
     if(isFonction == 1) {
       if((n->u.exp->type_exp == i_entier && symboles[indexFonction]->type == entier) || (n->u.exp->type_exp == i_booleen && symboles[indexFonction]->type == booleen)){
         nasm_exp(n->u.exp);
+        //mov esp, ebp
+        //pop ebp
         nasm_commande("pop", "eax", NULL, NULL, NULL); //on dépile la valeur d'expression sur eax
+        
+        if(symboles[indexFonction]->nb_params !=0) {
+          char * taille = malloc(sizeof(int));
+          sprintf(taille, "%d", symboles[indexFonction]->nb_params * 4);
+          nasm_commande("add", "esp", taille, NULL, NULL);
+        }
+        nasm_commande("mov", "esp", "ebp", NULL, NULL);
+        nasm_commande("pop", "ebp", NULL, NULL, NULL);
         nasm_commande("ret", NULL, NULL, NULL, "retour de fonction");
       }
       else if(n->u.exp->type_exp == i_appel_fonction)
@@ -200,7 +284,16 @@ void nasm_instruction(n_instruction* n){
         if( trouver_type_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom) == symboles[indexFonction]->type)
         {
           nasm_exp(n->u.exp);
+
           nasm_commande("pop", "eax", NULL, NULL, NULL); //on dépile la valeur d'expression sur eax
+
+          if(symboles[indexFonction]->nb_params !=0) {
+            char * taille = malloc(sizeof(int));
+            sprintf(taille, "%d", symboles[indexFonction]->nb_params * 4);
+            nasm_commande("add", "esp", taille, NULL, NULL);
+          }
+          nasm_commande("mov", "esp", "ebp", NULL, NULL);
+          nasm_commande("pop", "ebp", NULL, NULL, NULL);
           nasm_commande("ret", NULL, NULL, NULL, "retour de fonction");
         }
         else {
@@ -302,6 +395,20 @@ void nasm_exp(n_exp* n){
   {
 		nasm_operation(n->u.operation);
 	}
+  else if(n->type_exp == i_identifiant) {
+    int i = trouver_variable(variables, nb_variables, n->u.nom);
+    if(i != -1) {
+      if(variables[i]->adresse!=0){
+        char* buf = malloc(sizeof(variables[i]->adresse) + 6*sizeof(char));
+        sprintf(buf, "[ebp+%d]", variables[i]->adresse);
+        nasm_commande("mov", "eax", buf, NULL, NULL);
+      }
+    }
+    else {
+      printf("Erreur : variable non déclarée\n");
+      exit(1);
+    }
+  }
   else if(n->type_exp == i_lire)
   {
     nasm_lire();
