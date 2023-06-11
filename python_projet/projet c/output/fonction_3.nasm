@@ -6,8 +6,6 @@ sinput:	resb	255	;reserve a 255 byte space in memory for the users input string
 section	.text
 global _start
 	_g:		 ; declaration de fonction
-;Symbole h de type entier
-;Symbole g de type entier
 	call	_h		 ; appel de fonction
 	push	eax
 	pop	eax

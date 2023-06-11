@@ -1738,7 +1738,7 @@ yyreduce:
 
   case 12: /* instruction: expr POINT_VIRGULE  */
 #line 125 "analyse_syntaxique.y"
-                           { (yyval.inst) = creer_n_exp((yyvsp[-1].exp)); }
+                           { (yyval.inst) = creer_n_instruction((yyvsp[-1].exp)); }
 #line 1743 "analyse_syntaxique.c"
     break;
 

@@ -1,7 +1,5 @@
-entier g(){
- retourner h();
+entier f(){
+ ecrire(120);
+ retourner 0;
 }
-entier h(){
- retourner 7;
-}
-ecrire(g());
+f();

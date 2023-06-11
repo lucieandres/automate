@@ -169,6 +169,22 @@ void nasm_instruction(n_instruction* n){
   else if(n->type_instruction == i_cond) {
     nasm_condition(n->u.conds);
   }
+  // else if(n->type_instruction == i_expression) {
+  //     nasm_exp(n->u.exp);
+  // }
+  else if(n->type_instruction == i_appel_fonction_ins) {
+    nasm_exp(n->u.exp);
+  }
+  // else if(n->type_instruction == i_declaration) {
+  //   //
+  //   printf("todo");
+  //   exit(0);
+  // }
+  // else if(n->type_instruction == i_affectation) {
+  //   printf("todo");
+  //   exit(0);
+  //   //
+  // }
   else if(n->type_instruction == i_retourner) {
     if(isFonction == 1) {
       if((n->u.exp->type_exp == i_entier && symboles[indexFonction]->type == entier) || (n->u.exp->type_exp == i_booleen && symboles[indexFonction]->type == booleen)){
@@ -178,14 +194,8 @@ void nasm_instruction(n_instruction* n){
       }
       else if(n->u.exp->type_exp == i_appel_fonction)
       {
-        printf(";%s\n", toString(symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]));
-        printf(";%s\n", toString(symboles[indexFonction]));
-        // printf(";%s\n", symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]->nom);
-        // printf(";%d\n", trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom));
-        // printf(";%s\n", symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]->n->type);
-        // printf(";%s\n", symboles[indexFonction]->nom);
-        // printf(";%d\n", symboles[indexFonction]->type);
-        // printf(";%s\n", symboles[indexFonction]->n->type);
+        // printf(";%s\n", toString(symboles[trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom)]));
+        // printf(";%s\n", toString(symboles[indexFonction]));
 
         if( trouver_type_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom) == symboles[indexFonction]->type)
         {
@@ -207,6 +217,8 @@ void nasm_instruction(n_instruction* n){
       printf("Erreur : return en dehors d'une fonction");
       exit(1);
     }
+  }
+  else{
   }
 }
 

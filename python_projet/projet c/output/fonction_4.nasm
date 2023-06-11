@@ -13,6 +13,8 @@ global _start
 	pop	eax
 	ret		 ; retour de fonction
 _start:
+	call	_f		 ; appel de fonction
+	push	eax
 	mov	eax, 1		 ; 1 est le code de SYS_EXIT
 	mov	ebx, 0
 	int	0x80		 ; exit

@@ -122,7 +122,7 @@ instruction:
     |   ecrire { $$ =$1; }
     |   retourner { $$ = $1; }
     |   cond { $$ = $1; }
-    |   expr POINT_VIRGULE { $$ = creer_n_exp($1); }
+    |   expr POINT_VIRGULE { $$ = creer_n_instruction($1); }
 
 fonction:
     type IDENTIFIANT PARENTHESE_OUVRANTE list_parms PARENTHESE_FERMANTE BLOC_OUVRANT listeInstructions BLOC_FERMANT { $$ = creer_n_fonction($1, $2, $4, $7); }

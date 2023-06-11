@@ -183,6 +183,12 @@ void afficher_n_instruction(n_instruction *instruction, int indent)
 		afficher_n_exp(instruction->u.exp, indent + 1);
 		afficher("</expression>", indent);
 	}
+	else if (instruction->type_instruction == i_appel_fonction_ins)
+	{
+		afficher("<instruction>", indent);
+		afficher_n_exp(instruction->u.exp, indent + 1);
+		afficher("</instruction>", indent);
+	}
 }
 
 void afficher_conds(l_expr *liste, int indent)
@@ -505,6 +511,15 @@ n_exp *creer_n_appel_fonction(char *nom, n_exp *exp)
 	n->type_exp = i_appel_fonction;
 	n->u.appel_fonction = n_af;
 	return n;
+}
+
+n_instruction *creer_n_instruction(n_exp *exp)
+{
+	n_instruction *n_ins = malloc(sizeof(n_instruction));
+	n_ins->type_instruction = i_appel_fonction_ins;
+	n_ins->u.exp = exp;
+
+	return n_ins;
 }
 
 n_exp *creer_n_identifiant(char *nom)
