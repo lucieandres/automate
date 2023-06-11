@@ -1,0 +1,5 @@
+
+ecrire(non Faux et Faux); #0
+ecrire(non Faux et Vrai); #1
+ecrire(non Vrai et Faux); #0
+ecrire(non Vrai et Vrai); #0

@@ -76,9 +76,13 @@ n_programme* arbre_abstrait;
 %type <l_exp> conditionSi
 %type <inst> cond 
 
-%type <exp> expr 
+%type <exp> expr
+%type <exp> logique
+%type <exp> comparaison
+%type <exp> terme
 %type <exp> produit
 %type <inst> retourner
+%type <exp> VRAI
 
 %type <l_parm> list_parms 
 %type <parm> parms 
@@ -87,6 +91,14 @@ n_programme* arbre_abstrait;
 %type <string> type 
 
 %type <inst> declarationVariable 
+
+%left OU
+%left ET
+%left NON
+%left EQ DIFFERENT
+%left LT LE GT GE
+%left PLUS MOINS
+%left FOIS DIVISER MODULO
 
 %%
 
@@ -142,48 +154,61 @@ liste_expr:
     |   { $$ = NULL; }
 ;
 
-facteur:
-        ENTIER { $$ = creer_n_entier($1); }
-    |   IDENTIFIANT { $$ = creer_n_identifiant($1); }
-    |   MOINS ENTIER { $$ = creer_n_entier(-$2); }
-    |   PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE { $$ = $2; }
-    |   IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE { $$ = creer_n_appel_fonction($1, creer_n_liste_expr($3)); }
-    |   lire { $$ = $1; }
-;
-
-produit:
-        facteur { $$ = $1; }
-    |   produit FOIS facteur { $$ =creer_n_operation("*", $1 , $3); }
-    |   produit DIVISER facteur { $$ =creer_n_operation("/", $1 , $3); }
-;
-
 lire : LIRE PARENTHESE_OUVRANTE PARENTHESE_FERMANTE { $$ = creer_n_lire(); }
 
-expr: 
-        expr FOIS produit { $$ =creer_n_operation("*", $1, $3); }
-    |   expr DIVISER produit { $$ =creer_n_operation("/", $1, $3); }
-    |   expr PLUS produit { $$ =creer_n_operation("+", $1, $3); }
-    |   expr MOINS produit { $$ =creer_n_operation("-", $1 , $3); }
-    |   expr MODULO produit { $$ =creer_n_operation("%", $1 , $3); }
-    |   MOINS ENTIER { $$ = creer_n_entier(-$2); }
-    |   MOINS expr { $$ = creer_n_moins($2); }
-    |   NON expr { $$ = creer_n_non($2); }
+
+expr:
+    logique { $$ = $1; }
+    |   terme { $$ = $1; }
     |   IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE { $$ = creer_n_appel_fonction($1, creer_n_liste_expr($3)); }
     |   PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE { $$ = $2; }
-    |   ENTIER { $$ = creer_n_entier($1); }
     |   IDENTIFIANT { $$ = creer_n_identifiant($1); }
-    |   FAUX {	$$ = creer_n_booleen(0); }
+    |   expr PLUS terme { $$ = creer_n_operation("+", $1, $3); }
+    |   expr MOINS terme { $$ = creer_n_operation("-", $1, $3); }
+    ;
+
+logique:
+    NON logique { $$ = creer_n_non($2); }
+    |   FAUX { $$ = creer_n_booleen(0); }
     |   VRAI { $$ = creer_n_booleen(1); }
-    |   expr LE expr { $$ =creer_n_operation("<=", $1, $3); }
-    |   expr LT expr { $$ =creer_n_operation("<", $1, $3); }
-    |   expr GT expr { $$ =creer_n_operation(">", $1, $3); }
-    |   expr GE expr { $$ =creer_n_operation(">=", $1, $3); }
-    |   expr OU expr { $$ =creer_n_operation("OU", $1, $3); }
-    |   expr ET expr { $$ =creer_n_operation("ET", $1, $3); }
-    |   expr DIFFERENT expr { $$ =creer_n_operation("!=", $1, $3); }
-    |   expr EQ expr { $$ =creer_n_operation("==", $1, $3); }
-    |   lire { $$ = $1; }
-;
+    |   logique ET logique { $$ = creer_n_operation("ET", $1, $3); }
+    |   logique OU logique { $$ = creer_n_operation("OU", $1, $3); }
+    |   comparaison { $$ = $1; }
+    ;
+    
+
+comparaison:
+    comparaison LT terme { $$ = creer_n_operation("<", $1, $3); }
+    | comparaison LE terme { $$ = creer_n_operation("<=", $1, $3); }
+    | comparaison GT terme { $$ = creer_n_operation(">", $1, $3); }
+    | comparaison GE terme { $$ = creer_n_operation(">=", $1, $3); }
+    | comparaison EQ terme { $$ = creer_n_operation("==", $1, $3); }
+    | comparaison DIFFERENT terme { $$ = creer_n_operation("!=", $1, $3); }
+    | terme { $$ = $1; }
+    ;
+
+terme:
+    terme PLUS produit { $$ = creer_n_operation("+", $1, $3); }
+    |   terme MOINS produit { $$ = creer_n_operation("-", $1, $3); }
+    |   produit { $$ = $1; }
+    ;
+
+produit:
+    produit FOIS facteur { $$ = creer_n_operation("*", $1, $3); }
+    | produit DIVISER facteur { $$ = creer_n_operation("/", $1, $3); }
+    | produit MODULO facteur { $$ = creer_n_operation("%", $1, $3); }
+    | facteur { $$ = $1; }
+    ;
+
+facteur:
+    ENTIER { $$ = creer_n_entier($1); }
+    | IDENTIFIANT { $$ = creer_n_identifiant($1); }
+    | MOINS ENTIER { $$ = creer_n_entier(-$2); }
+    | PARENTHESE_OUVRANTE expr PARENTHESE_FERMANTE { $$ = $2; }
+    | IDENTIFIANT PARENTHESE_OUVRANTE liste_expr PARENTHESE_FERMANTE { $$ = creer_n_appel_fonction($1, creer_n_liste_expr($3)); }
+    | lire { $$ = $1; }
+    ;
+
 
 affectation:
     IDENTIFIANT EGALE expr POINT_VIRGULE { $$ = creer_n_affectation($1, $3); }
