@@ -7,8 +7,11 @@
 
 //pour afficher le code uniquement si l'option afficher_nasm vaut 1
 #define printifm(format, ...) if(afficher_nasm){ printf(format, __VA_ARGS__); }
-static int labelgenerate = 0;
-static symbole * symboles[MAX_SYMBOLES];
+int labelgenerate = 0;
+int isFonction = 1;
+int indexFonction = -1;
+static Symbole * symboles[MAX_SYMBOLES];
+int nb_symboles = 0;
 
 int afficher_nasm = 1;
 
@@ -39,14 +42,15 @@ void nasm_commande(char *opcode, char *op1, char *op2, char *op3, char *comment)
 }
 
 
-void nasm_prog(n_programme *n) {
-  
+void nasm_prog(n_programme *n)
+{
   printifm("%%include\t'%s'\n","io.asm");
   printifm("%s","\nsection\t.bss\n");
-    nasm_liste_variable_name(n->instructions);
+  nasm_liste_variable_name(n->instructions);
   printifm("%s", "sinput:\tresb\t255\t;reserve a 255 byte space in memory for the users input string\n");
   printifm("%s","\nsection\t.text\n");
   printifm("%s","global _start\n");
+  nasm_define_symbole(n->instructions);
   printifm("%s","_start:\n");
   nasm_liste_instructions(n->instructions);
   //pour quitter le programme
@@ -55,10 +59,89 @@ void nasm_prog(n_programme *n) {
   nasm_commande("int", "0x80", NULL, NULL, "exit");
 }
 
-void nasm_liste_variable_name(n_l_instructions *n) {
+void nasm_define_symbole(n_l_instructions *n) {
+  do {
+    if (n->instruction != NULL){
+      if(n->instruction->type_instruction == i_fonction) {
+        
+        //printifm("%s","\nsection\t.text\n");
+        n_fonction *func = n->instruction->u.fonction;
+        
+        char * func_name = malloc(strlen(func->nom) + 1);
+        sprintf(func_name, "_%s", func->nom);
+        //printifm("%s %s\n","global", func_name);
+        if(strcmp(func->type, "ENTIER") == 0)
+        {
+          ajouter_symbole_entier(symboles, &nb_symboles, func->nom, func);
+        }
+        else if(strcmp(func->type, "BOOLEEN") == 0)
+        {
+          ajouter_symbole_booleen(symboles, &nb_symboles, func->nom, func);
+        }
+        else {
+          printf("Erreur de type de variable");
+          exit(1);
+        }
+      }
+    }
+    n = n->instructions;
+  } while(n != NULL );
+  nasm_define_all_fonction();
+}
+
+void nasm_define_all_fonction()
+{
+  for(int i = 0; i < nb_symboles; i++)
+  {
+    indexFonction = i;
+    nasm_define_fonction(symboles[i]->n);
+  }
+}
+
+void nasm_define_fonction(n_fonction *n)
+{
+  isFonction = 1;
+
+  char * name = n->nom;
+  char * func_name = malloc(strlen(name) + 2);
+  sprintf(func_name, "_%s:", name);
+  nasm_commande(func_name, NULL, NULL, NULL, "declaration de fonction");
+  nasm_liste_instructions(n->instructions);
+  isFonction = 0;
+}
+
+void nasm_appel_fonction(n_appel_fonction *n)
+{
+  int i = trouver_symbole(symboles, nb_symboles, n->nom);
+  char * func_name = malloc(strlen(n->nom) + 1);
+  sprintf(func_name, "_%s", n->nom);
+  if(i!=-1) {
+    if(symboles[i]->type == entier)
+    {
+      nasm_commande("call", func_name, NULL, NULL, "appel de fonction");
+    }
+    else if(symboles[i]->type == booleen)
+    {
+      nasm_commande("call", func_name, NULL, NULL, "appel de fonction");
+    }
+    else {
+      printf("Erreur de type de variable");
+      exit(1);
+    }
+  }
+  else {
+    printf("Erreur : fonction non déclarée");
+    exit(1);
+  }
+}
+
+void nasm_liste_variable_name(n_l_instructions *n)
+{
 	do {
-		if (n->instruction != NULL){
-			if(n->instruction->type_instruction == i_declaration) {
+		if (n->instruction != NULL)
+    {
+			if(n->instruction->type_instruction == i_declaration)
+      {
         n_declaration *declaration = n->instruction->u.declaration;
         char *data = "dd 0";
         nasm_commande(declaration->nom, data, NULL, NULL, "declaration de variable");
@@ -85,6 +168,38 @@ void nasm_instruction(n_instruction* n){
 	}
   else if(n->type_instruction == i_cond) {
     nasm_condition(n->u.conds);
+  }
+  else if(n->type_instruction == i_retourner) {
+    if(isFonction == 1) {
+      if((n->u.exp->type_exp == i_entier && symboles[indexFonction]->type == entier) || (n->u.exp->type_exp == i_booleen && symboles[indexFonction]->type == booleen)){
+        nasm_exp(n->u.exp);
+        nasm_commande("pop", "eax", NULL, NULL, NULL); //on dépile la valeur d'expression sur eax
+        nasm_commande("ret", NULL, NULL, NULL, "retour de fonction");
+      }
+      else if(n->u.exp->type_exp == i_appel_fonction)
+      {
+        printf(";%d\n", trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom));
+        printf(";%d\n", symboles[indexFonction]->type);
+        if( trouver_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom) == symboles[indexFonction]->type)
+        {
+          nasm_exp(n->u.exp);
+          nasm_commande("pop", "eax", NULL, NULL, NULL); //on dépile la valeur d'expression sur eax
+          nasm_commande("ret", NULL, NULL, NULL, "retour de fonction");
+        }
+        else {
+          printf("Erreur : type de retour de fonction la fonction appelée est incorrect");
+          exit(1);
+        }
+      }
+      else {
+        printf("Erreur : type de retour de fonction incorrect");
+        exit(1);
+      }
+    }
+    else {
+      printf("Erreur : return en dehors d'une fonction");
+      exit(1);
+    }
   }
 }
 
@@ -168,13 +283,24 @@ void nasm_exp(n_exp* n){
   {
 		nasm_operation(n->u.operation);
 	}
-  else if(n->type_exp == i_lire) {
+  else if(n->type_exp == i_lire)
+  {
     nasm_lire();
-  } 
-  else if (n->type_exp == i_non) {
-    if(n->u.exp->type_exp != i_booleen) {
-      if(n->u.exp->type_exp == i_operation) {
+  }
+  else if (n->type_exp == i_non)
+  {
+    if(n->u.exp->type_exp != i_booleen)
+    {
+      if(n->u.exp->type_exp == i_operation)
+      {
         verif_type(n->u.exp->u.operation);
+      }
+      else if(n->u.exp->type_exp == i_appel_fonction) {
+        if(trouver_type_symbole(symboles, nb_symboles, n->u.exp->u.appel_fonction->nom) != booleen) 
+        {
+          printf("La fonction n'existe pas ou ne retourne pas de booleen\n");
+          exit(1);
+        }
       }
       else {
       printf("Erreur : le non logique ne peut s'appliquer qu'à des booléens\n");
@@ -199,6 +325,10 @@ void nasm_exp(n_exp* n){
     else {
       nasm_commande("push", "0", NULL, NULL, "FAUX") ;
     }
+  }
+  else if( n->type_exp == i_appel_fonction) {
+    nasm_appel_fonction(n->u.appel_fonction);
+    nasm_commande("push", "eax", NULL, NULL, NULL);
   }
 
 }
@@ -296,10 +426,20 @@ int verif_type(n_operation* n) {
     {
       if(n->exp1->type_exp == i_operation)
         verif_type(n->exp1->u.operation);
-      else if(n->exp1->type_exp == i_non) {
-        if(n->exp1->u.exp->type_exp == i_operation) {
+      else if(n->exp1->type_exp == i_non)
+      {
+        if(n->exp1->u.exp->type_exp == i_operation)
+        {
           verif_type(n->exp1->u.exp->u.operation);
         }
+      }
+      else if(n->exp1->type_exp == i_appel_fonction)
+      {
+          if(trouver_type_symbole(symboles, nb_symboles, n->exp1->u.appel_fonction->nom) != booleen)
+          {
+            printf("Erreur : les deux opérandes doivent être des booléens\n");
+            exit(1);
+          }
       }
       else {
         printf("Erreur : les deux opérandes doivent être des booléens\n");
@@ -310,12 +450,23 @@ int verif_type(n_operation* n) {
     {
       if(n->exp2->type_exp == i_operation)
         verif_type(n->exp2->u.operation);
-      else if(n->exp2->type_exp == i_non) {
-        if(n->exp2->u.exp->type_exp == i_operation) {
+      else if(n->exp2->type_exp == i_non)
+      {
+        if(n->exp2->u.exp->type_exp == i_operation)
+        {
           verif_type(n->exp2->u.exp->u.operation);
         }
       }
-      else {
+      else if(n->exp2->type_exp == i_appel_fonction)
+      {
+          if(trouver_type_symbole(symboles, nb_symboles, n->exp2->u.appel_fonction->nom) != booleen)
+          {
+            printf("Erreur : les deux opérandes doivent être des booléens\n");
+            exit(1);
+          }
+      }
+      else
+      {
         printf("Erreur : les deux opérandes doivent être des booléens\n");
         exit(1);
       }
@@ -331,12 +482,23 @@ int verif_type(n_operation* n) {
     {
       if(n->exp1->type_exp == i_operation)
         verif_type(n->exp1->u.operation);
-      else if(n->exp1->type_exp == i_non) {
-        if(n->exp1->u.exp->type_exp == i_operation) {
+      else if(n->exp1->type_exp == i_non)
+      {
+        if(n->exp1->u.exp->type_exp == i_operation)
+        {
           verif_type(n->exp1->u.exp->u.operation);
         }
       }
-      else {
+      else if(n->exp1->type_exp == i_appel_fonction)
+      {
+          if(trouver_type_symbole(symboles, nb_symboles, n->exp1->u.appel_fonction->nom) != entier)
+          {
+            printf("Erreur : les deux opérandes doivent être des entiers\n");
+            exit(1);
+          }
+      }
+      else
+      {
         printf("Erreur : les deux opérandes doivent être des entiers\n");
         exit(1);
       }
@@ -345,12 +507,23 @@ int verif_type(n_operation* n) {
     {
       if(n->exp2->type_exp == i_operation)
         verif_type(n->exp2->u.operation);
-      else if(n->exp2->type_exp == i_non) {
-        if(n->exp2->u.exp->type_exp == i_operation) {
+      else if(n->exp2->type_exp == i_non)
+      {
+        if(n->exp2->u.exp->type_exp == i_operation)
+        {
           verif_type(n->exp2->u.exp->u.operation);
         }
-      } 
-      else {
+      }
+      else if(n->exp2->type_exp == i_appel_fonction)
+      {
+          if(trouver_type_symbole(symboles, nb_symboles, n->exp2->u.appel_fonction->nom) != entier)
+          {
+            printf("Erreur : les deux opérandes doivent être des entiers\n");
+            exit(1);
+          }
+      }
+      else
+      {
         printf("Erreur : les deux opérandes doivent être des entiers\n");
         exit(1);
       }

@@ -12,6 +12,9 @@ void nasm_condition(l_expr* n);
 void nasm_lire();
 int verif_type(n_operation* n);
 void setopcond(n_exp* n, char *label_debut, char *label_fin);
-
+void nasm_define_symbole(n_l_instructions *n);
+void nasm_define_fonction(n_fonction *n);
+void nasm_appel_fonction(n_appel_fonction *n);
+void nasm_define_all_fonction();
 
 #endif

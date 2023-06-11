@@ -6,9 +6,5 @@ sinput:	resb	255	;reserve a 255 byte space in memory for the users input string
 
 section	.text
 global _start
-_start:
-	loop1 :
-	pop	eax
-	cmp	eax, 0
-	je	endloop1
+	_max:		 ; declaration de fonction
 Erreur : la condition doit être un booléen

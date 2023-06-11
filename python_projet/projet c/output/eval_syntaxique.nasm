@@ -7,5 +7,7 @@ sinput:	resb	255	;reserve a 255 byte space in memory for the users input string
 
 section	.text
 global _start
-_start:
-Erreur : la condition doit être un booléen
+	_estPair:		 ; declaration de fonction
+;1
+;fonction a l'index 1
+Erreur : type de retour de fonction incorrect
